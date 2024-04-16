@@ -1,0 +1,18 @@
+[package]
+name = "personal_website"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+leptos = { version = "0.6.11", features = ["nightly", "csr"] }
+leptos_router = { version = "0.6.11", features = ["nightly", "csr"] }
+leptos_meta = { version = "0.6.11", features = ["nightly", "csr"] }
+leptos-use = "0.10.7"
+stylance = "0.3.0"
+gloo-timers = { version = "0.3.0", features = ["futures"] }
+uuid = { version = "1", features = ["v4"] }
+console_error_panic_hook = "0.1.7"
+console_log = "1"
+log = "0.4"
+
+
