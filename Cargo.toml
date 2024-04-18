@@ -8,11 +8,20 @@ leptos = { version = "0.6.11", features = ["nightly", "csr"] }
 leptos_router = { version = "0.6.11", features = ["nightly", "csr"] }
 leptos_meta = { version = "0.6.11", features = ["nightly", "csr"] }
 leptos-use = "0.10.7"
-stylance = "0.3.0"
+stylance = { version = "0.3.0", features = ["nightly"] }
 gloo-timers = { version = "0.3.0", features = ["futures"] }
 uuid = { version = "1", features = ["v4"] }
 console_error_panic_hook = "0.1.7"
 console_log = "1"
 log = "0.4"
 
+[package.metadata.leptos]
+style-file = "./index.css"
 
+[package.metadata.stylance]
+output_file = "./target/stylance-output/bundle.css"
+output_dir = "./target/"
+extensions = [".css"]
+folders = ["./src"]
+hash_len = 3
+class_name_pattern = "[name]_[hash]"

@@ -9,6 +9,8 @@ use master_page::*;
 pub fn App() -> impl IntoView {
     provide_meta_context();
 
+    // stylance::import_style!(css, "./path/to/local_style.css");
+
     view! {
         <Title text="Solweo"/>
         <Link
