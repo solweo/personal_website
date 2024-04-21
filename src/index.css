@@ -1,5 +1,26 @@
 body {
 	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
-	background-color: floralwhite;
 	color: #34495e;
+	background-color: floralwhite;
+	color-scheme: var(--color-scheme);
+}
+
+/* Global variables */
+
+:root {
+	/* Brand colors */
+	--beige-100: rgba(255, 250, 240, 1);
+	--beige-70: rgba(255, 250, 240, 0.7);
+	--beige-40: rgba(255, 250, 240, 0.4);
+	--beige-20: rgba(255, 250, 240, 0.2);
+}
+
+/* Themes */
+
+.theme-light {
+    --color-scheme: light;
+}
+
+.theme-dark {
+    --color-scheme: dark;
 }

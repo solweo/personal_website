@@ -1,9 +1,8 @@
 [package]
-name = "personal_website"
-version = "0.1.0"
+name = "ui_kit"
+version = { workspace = true }
 edition = "2021"
-authors = ["Adrian Alekseev"]
-repository = "https://github.com/solweo/personal_website"
+description = "A collection of UI components"
 
 [dependencies]
 leptos = { version = "0.6.11", features = ["nightly", "csr"] }
@@ -16,28 +15,8 @@ uuid = { version = "1", features = ["v4"] }
 console_error_panic_hook = "0.1.7"
 console_log = "1"
 log = "0.4"
-ui_kit = { path = "./ui_kit"}
 
 [package.metadata.stylance]
-output_file = "./target/stylance-output/bundle.css"
-output_dir = "./target/"
 extensions = [".css"]
-folders = ["./src", "./ui_kit"]
+folders = ["./src"]
 class_name_pattern = "[name]"
-
-[workspace]
-resolver = "2"
-members = [
-  # utilities 
-
-  # core
-  "ui_kit",
-
-  # integrations
-
-  # libraries
-]
-exclude = ["works"]
-
-[workspace.package]
-version = "0.1.0"
