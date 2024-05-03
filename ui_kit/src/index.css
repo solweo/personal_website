@@ -5,6 +5,14 @@ body {
 	color-scheme: var(--color-scheme);
 }
 
+@custom-selector :--all-textual-selectors h1, h2, h3, h4, h5, h6, button, a;
+
+:--all-textual-selectors {
+	font-size: 1.1rem;
+	font-weight: bold;
+	padding: 0;
+}
+
 /* Global variables */
 
 :root {

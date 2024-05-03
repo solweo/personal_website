@@ -5,6 +5,8 @@ use leptos_router::*;
 mod master_page;
 use master_page::*;
 
+use ui_kit::widgets::Header;
+
 #[component]
 pub fn App() -> impl IntoView {
     provide_meta_context();
@@ -26,11 +28,13 @@ pub fn App() -> impl IntoView {
         <Router>
 
             <nav>
-                <a href="/">"Home"</a>
-                <a href="/about">"About"</a>
-                <a href="/works">"Works"</a>
-                <a href="/contact">"Contact"</a>
+                <A href="/">"Home"</A>
+                <A href="/about">"About"</A>
+                <A href="/works">"Works"</A>
+                <A href="/contact">"Contact"</A>
             </nav>
+            
+            <Header/>
             
             <h1>"Personal website"</h1>
 
