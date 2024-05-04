@@ -5,7 +5,7 @@ use leptos_router::*;
 mod master_page;
 use master_page::*;
 
-use ui_kit::widgets::Header;
+use ui_kit::widgets::{LoremImpus, Header};
 
 #[component]
 pub fn App() -> impl IntoView {
@@ -15,38 +15,48 @@ pub fn App() -> impl IntoView {
 
     view! {
         <Title text="Solweo"/>
+
         <Link
             rel="shortcut icon"
             type_="image/ico"
             href="http://cdn.solweo.tech/solweo-logo-bold-96px.png"
         />
+
         <Meta
             name="description"
             content="Hands-on experience on topics ranging from design to development from Adrian Alekseev aka Solweo"
         />
 
-        <Router>
+        <Body/>
 
-            <nav>
-                <A href="/">"Home"</A>
-                <A href="/about">"About"</A>
-                <A href="/works">"Works"</A>
-                <A href="/contact">"Contact"</A>
-            </nav>
-            
+        <Router>   
             <Header/>
-            
             <h1>"Personal website"</h1>
-
             <main>
                 <Routes>
                     <Route path="/" view=Home/>
                     <Route path="/about" view=About/>
                     <Route path="/works" view=WorksList/>
                     <Route path="/works/:id" view=WorkInfo/>
-                    <Route path="/contact" view=Contact/>
                 </Routes>
             </main>
+            <LoremImpus/>
         </Router>
+
+        // <Body>
+        //     <Router>   
+        //         <Header/>
+        //         <h1>"Personal website"</h1>
+        //         <main>
+        //             <Routes>
+        //                 <Route path="/" view=Home/>
+        //                 <Route path="/about" view=About/>
+        //                 <Route path="/works" view=WorksList/>
+        //                 <Route path="/works/:id" view=WorkInfo/>
+        //             </Routes>
+        //         </main>
+        //         <LoremImpus/>
+        //     </Router>
+        // </Body>
     }
 }
