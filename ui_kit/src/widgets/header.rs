@@ -61,29 +61,10 @@ pub fn Header() -> impl IntoView {
     };
     // ^ Can't be reused more than once
 
-    let lurking_nav = move || {
-        nav()
-            .class(css::hidden_nav, move || {
-                menu_opened() || contact_opened() || match sd() {
-                    Direction::Up => false,
-                    Direction::Down => true,
-                }
-            })
-            .child(view! {
-                <button
-                    on:click = open_menu
-                >"MENU"</button>
-                <h3>"|"</h3>
-                <button
-                    on:click = open_contact
-                >"CONTACT"</button>
-            })
-    };
-
     let pop_up_menu = move || {
         nav()
-            .class(css::header_pop_up_menu, true)
-            .class(css::header_pop_up_menu_hidden, move || {
+            .class(css::bfh_pop_up, true)
+            .class(css::bfh_pop_up_hidden, move || {
                 !menu_opened()
             })
             .child(view! {
@@ -95,8 +76,8 @@ pub fn Header() -> impl IntoView {
 
     let pop_up_contact = move || {
         nav()
-            .class(css::header_pop_up_contact, true)
-            .class(css::header_pop_up_contact_hidden, move || {
+            .class(css::bfh_pop_up, true)
+            .class(css::bfh_pop_up_hidden, move || {
                 !contact_opened()
             })
             .child(view! {
@@ -105,25 +86,37 @@ pub fn Header() -> impl IntoView {
                 <A on:click=close_either href="mailto:adrian@solweo.tech">"Mail: adrian@solweo.tech"</A>
             })
     };
+    
+    header()
+        .class(css::bottom_floating_header, true)
+        .class(css::bottom_floating_header_expanded, move || {
+            menu_opened() || contact_opened()
+        })
+        .class(css::bottom_floating_header_collapsed, move || {
+            menu_opened() || contact_opened() || match sd() {
+                Direction::Up => false,
+                Direction::Down => true,
+            }
+        })
+        .child(view! {
+            <A href="/" class=css::lurking_logo>"SOLWEO"</A>
+            
+            <nav 
+                class=css::lurking_close
+                on:click = close_either
+            >"CLOSE"</nav>
+            
+            <nav class=css::lurking_nav>
+                <button
+                    on:click = open_menu
+                >"MENU"</button>
+                <h3>"|"</h3>
+                <button
+                    on:click = open_contact
+                >"CONTACT"</button>
+            </nav>
 
-    let lurking_close = move || {
-        button()
-            .class(css::close_hidden, move || {
-                !menu_opened() && !contact_opened()
-            })
-            .on(ev::click, close_either)
-            .child("CLOSE")
-    };
-
-    view! {
-        <header 
-            class=css::bottom_floating_header
-        >
-            <A href="/">"SOLWEO"</A>
-            {lurking_close}
-            {lurking_nav}
             {pop_up_menu}
             {pop_up_contact}
-        </header>
-    }
+        })
 }

@@ -7,11 +7,13 @@
     left: 50%;
     transform: translate(-50%);
 
-    background-color: white;
+    padding: 0.1rem;
+	background-color: white;
+	box-shadow: 0 0 80px gray;
     border: 0.1rem solid gray;
     border-radius: 1.1rem;
 
-    transition: 1s ease-out;
+    transition: 0.25s ease-out;
 
     & a, button {
         margin: 0;
@@ -33,56 +35,58 @@
         cursor: pointer;
     }
 
-    & nav {
+    & .lurking_close {
+        display: none;
+    }
+
+    & .lurking_nav {
         display: flex;
         justify-content: space-between;
     }
 
-    .hidden_nav {
-        display: none;
+    & .bfh_pop_up {
+        display: flex;
+        flex-direction: column;
+    
+        position: fixed;
+        bottom: 2.2rem;
+        left: 50%;
+        transform: translate(-50%);
+    
+        background-color: #34495e;
+        box-shadow: 0 0 80px white;
+        border: 0.1rem solid white;
+        border-radius: 1.1rem;
+    
+        width: max-content;
+
+        & a, button, h3 {
+            margin: 0;
+            color: white;
+            padding-inline: 1.1rem;
+        }
     }
 
-    .header_pop_up_menu_hidden {
-        display: none;
-    }
-
-    .header_pop_up_contact_hidden {
-        display: none;
-    }
-
-    .close_hidden {
+    & .bfh_pop_up_hidden {
         display: none;
     }
 }
 
-.header_pop_up_menu {
-    display: flex;
-    flex-direction: column;
+.bottom_floating_header_expanded {
+    background-color: #34495e;
 
-    position: fixed;
-    bottom: 2.2rem;
-    left: 50%;
-    transform: translate(-50%);
+    & .lurking_logo {
+        display: none;
+    }
 
-    background-color: white;
-    border: 0.1rem solid gray;
-    border-radius: 1.1rem;
-
-    padding: 1.1rem;
+    & .lurking_close {
+        display: block;
+        color: white;
+    }
 }
 
-.header_pop_up_contact {
-    display: flex;
-    flex-direction: column;
-
-    position: fixed;
-    bottom: 2.2rem;
-    left: 50%;
-    transform: translate(-50%);
-
-    background-color: white;
-    border: 0.1rem solid gray;
-    border-radius: 1.1rem;
-
-    padding: 1.1rem;
+.bottom_floating_header_collapsed {
+    & .lurking_nav {
+        display: none;
+    }
 }
