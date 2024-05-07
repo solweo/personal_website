@@ -5,7 +5,7 @@ use leptos_router::*;
 mod master_page;
 use master_page::*;
 
-use ui_kit::widgets::{LoremImpus, Preview, Header};
+use ui_kit::widgets::{LoremImpus, Preview, Header, NeumorphicButton};
 
 #[component]
 pub fn App() -> impl IntoView {
@@ -40,6 +40,7 @@ pub fn App() -> impl IntoView {
                     <Route path="/works/:id" view=WorkInfo/>
                 </Routes>
             </main>
+            <NeumorphicButton/>
             <Preview/>
             <LoremImpus/>
         </Router>
