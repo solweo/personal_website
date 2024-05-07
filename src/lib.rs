@@ -38,11 +38,20 @@ pub fn App() -> impl IntoView {
                     <Route path="/about" view=About/>
                     <Route path="/works" view=WorksList/>
                     <Route path="/works/:id" view=WorkInfo/>
+                    <Route path="/ui-kit-preview" view=UiKitPreview/>
                 </Routes>
             </main>
-            <NeumorphicButton/>
-            <Preview/>
             <LoremImpus/>
         </Router>
+    }
+}
+
+#[component]
+pub fn UiKitPreview() -> impl IntoView {
+    view! {
+        <h3>"UI kit preview"</h3>
+        <NeumorphicButton/>
+        <Preview/>
+        <Outlet/>
     }
 }

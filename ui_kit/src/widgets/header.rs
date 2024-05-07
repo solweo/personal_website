@@ -72,6 +72,7 @@ pub fn Header() -> impl IntoView {
                 <A on:click=close_either href="/">"Home"</A>
                 <A on:click=close_either href="/about">"About"</A>
                 <A on:click=close_either href="/works">"Works"</A>
+                <A on:click=close_either href="/ui-kit-preview">"Demo"</A>
             })
     };
 
