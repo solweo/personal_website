@@ -8,6 +8,7 @@ use web_sys::MouseEvent;
 use super::WidgetState;
 
 get_css!(css, "./header.css");
+get_css!(index, "../index.css");
 
 #[derive(PartialEq, Debug)]
 enum Direction {
@@ -86,8 +87,9 @@ pub fn Header() -> impl IntoView {
                 <A on:click=close_either href="mailto:adrian@solweo.tech">"Mail: adrian@solweo.tech"</A>
             })
     };
-    
+
     header()
+        .class(index::small_context, true)
         .class(css::bottom_floating_header, true)
         .class(css::bottom_floating_header_expanded, move || {
             menu_opened() || contact_opened()
@@ -99,20 +101,31 @@ pub fn Header() -> impl IntoView {
             }
         })
         .child(view! {
-            <A href="/" class=css::lurking_logo>"SOLWEO"</A>
+            <A 
+                href="/" 
+                class=format!("{} {}", 
+                    index::neutral_clickable,
+                    css::lurking_logo
+                )
+            >"SOLWEO"</A>
             
             <nav 
-                class=css::lurking_close
+                class=format!("{} {}", 
+                    index::neutral_clickable,
+                    css::lurking_close
+                )
                 on:click = close_either
             >"CLOSE"</nav>
             
             <nav class=css::lurking_nav>
                 <button
                     on:click = open_menu
+                    class=index::neutral_clickable
                 >"MENU"</button>
                 <h3>"|"</h3>
                 <button
                     on:click = open_contact
+                    class=index::neutral_clickable
                 >"CONTACT"</button>
             </nav>
 

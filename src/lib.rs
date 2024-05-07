@@ -5,7 +5,7 @@ use leptos_router::*;
 mod master_page;
 use master_page::*;
 
-use ui_kit::widgets::{LoremImpus, Header};
+use ui_kit::widgets::{LoremImpus, Preview, Header};
 
 #[component]
 pub fn App() -> impl IntoView {
@@ -40,23 +40,8 @@ pub fn App() -> impl IntoView {
                     <Route path="/works/:id" view=WorkInfo/>
                 </Routes>
             </main>
+            <Preview/>
             <LoremImpus/>
         </Router>
-
-        // <Body>
-        //     <Router>   
-        //         <Header/>
-        //         <h1>"Personal website"</h1>
-        //         <main>
-        //             <Routes>
-        //                 <Route path="/" view=Home/>
-        //                 <Route path="/about" view=About/>
-        //                 <Route path="/works" view=WorksList/>
-        //                 <Route path="/works/:id" view=WorkInfo/>
-        //             </Routes>
-        //         </main>
-        //         <LoremImpus/>
-        //     </Router>
-        // </Body>
     }
 }
