@@ -38,6 +38,7 @@ pub fn Preview() -> impl IntoView {
     get_css!(index, "./index.css");
 
     view! {
+        <NeumorphicButton/>
         <div class=index::large_context>
             <button class = index::neutral_clickable>"Neutral"</button>
             <button class = index::submissive_clickable>"Submissive"</button>

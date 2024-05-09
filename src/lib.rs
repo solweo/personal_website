@@ -5,7 +5,7 @@ use leptos_router::*;
 mod master_page;
 use master_page::*;
 
-use ui_kit::widgets::{LoremImpus, Preview, Header, NeumorphicButton};
+use ui_kit::widgets::{LoremImpus, Preview, Header};
 
 #[component]
 pub fn App() -> impl IntoView {
@@ -50,7 +50,6 @@ pub fn App() -> impl IntoView {
 pub fn UiKitPreview() -> impl IntoView {
     view! {
         <h3>"UI kit preview"</h3>
-        <NeumorphicButton/>
         <Preview/>
         <Outlet/>
     }

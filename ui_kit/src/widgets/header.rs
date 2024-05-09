@@ -1,4 +1,4 @@
-use leptos::{html::{button, h3, header, nav}, *};
+use leptos::{html::{button, h1, h3, header, nav}, *};
 use leptos_meta::*;
 use leptos_router::*;
 use leptos_use::*;
@@ -62,6 +62,8 @@ pub fn Header() -> impl IntoView {
     };
     // ^ Can't be reused more than once
 
+    /*
+
     let pop_up_menu = move || {
         nav()
             .class(css::bfh_pop_up, true)
@@ -89,48 +91,57 @@ pub fn Header() -> impl IntoView {
             })
     };
 
+    */
+    
+    // Rethinking
+
+    let pop_up_menu = move || {
+        nav()
+            .class(css::re_pop_up, true)
+            .child(view! {
+                <A class=index::neutral_clickable on:click=close_either href="/">"Home"</A>
+                <A class=index::neutral_clickable on:click=close_either href="/about">"About"</A>
+                <A class=index::neutral_clickable on:click=close_either href="/works">"Works"</A>
+                <A class=index::neutral_clickable on:click=close_either href="/ui-kit-preview">"Demo"</A>
+            })
+    };
+    
     header()
-        .class(index::small_context, true)
-        .class(css::bottom_floating_header, true)
-        .class(css::bottom_floating_header_expanded, move || {
-            menu_opened() || contact_opened()
+        .class(index::medium_context, true)
+        .class(css::re_header_baseline, true)
+        .dyn_classes(move || {
+            let a = match (menu_opened(), contact_opened(), sd()) {
+                // (mo, co, sd)
+                (true, _, _) => css::re_header_expanded,
+                (_, true, _) => css::re_header_expanded,
+                (_, _, Direction::Up) => css::re_header_neutral,
+                (_, _, Direction::Down) => css::re_header_collapsed,
+            };
+            vec![css::re_header_baseline, a]
         })
-        .class(css::bottom_floating_header_collapsed, move || {
-            menu_opened() || contact_opened() || match sd() {
-                Direction::Up => false,
-                Direction::Down => true,
-            }
-        })
-        .child(view! {
-            <A 
-                href="/" 
-                class=format!("{} {}", 
-                    index::neutral_clickable,
-                    css::lurking_logo
-                )
-            >"SOLWEO"</A>
-            
-            <nav 
-                class=format!("{} {}", 
-                    index::neutral_clickable,
-                    css::lurking_close
-                )
-                on:click = close_either
-            >"CLOSE"</nav>
-            
-            <nav class=css::lurking_nav>
+        .child((
+            h1().class(index::neutral_clickable, true).class(css::re_logo, true).child("SOLWEO"),
+            view! {
                 <button
+                    on:click = close_either
+                    class=format!("{} {}", 
+                    index::neutral_clickable,
+                    css::re_close
+                )
+                >"CLOSE"</button>
+            },
+            nav()
+                .class(css::re_nav, true)
+                .child(view! {
+                    <button
                     on:click = open_menu
                     class=index::neutral_clickable
-                >"MENU"</button>
-                <h3>"|"</h3>
-                <button
-                    on:click = open_contact
-                    class=index::neutral_clickable
-                >"CONTACT"</button>
-            </nav>
-
-            {pop_up_menu}
-            {pop_up_contact}
-        })
+                    >"MENU"</button>
+                    <button
+                        on:click = open_contact
+                        class=index::neutral_clickable
+                    >"CONTACT"</button>
+                }),
+            pop_up_menu
+        ))
 }
