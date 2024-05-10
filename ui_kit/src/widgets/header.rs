@@ -56,83 +56,64 @@ pub fn Header() -> impl IntoView {
         set_menu_opened.update(|v| *v = false);
     };
 
-    let (sd, _) = create_signal(TrackScroll::default());
-    let sd = move || {
-        sd.with(|s| s.direction())
+    let (scroll_direction, _) = create_signal(TrackScroll::default());
+    let scroll_direction = move || {
+        scroll_direction.with(|s| s.direction())
     };
     // ^ Can't be reused more than once
 
-    /*
+    let header_attr = create_memo(move |_| 
+        with!(|menu_opened, contact_opened| 
+            match (menu_opened, contact_opened, scroll_direction()) {
+                (true, _, _) => "expanded",
+                (_, true, _) => "expanded",
+                (_, _, Direction::Up) => "neutral",
+                (_, _, Direction::Down) => "collapsed",
+            }
+        )
+    );
 
-    let pop_up_menu = move || {
-        nav()
-            .class(css::bfh_pop_up, true)
-            .class(css::bfh_pop_up_hidden, move || {
-                !menu_opened()
-            })
-            .child(view! {
-                <A on:click=close_either href="/">"Home"</A>
-                <A on:click=close_either href="/about">"About"</A>
-                <A on:click=close_either href="/works">"Works"</A>
-                <A on:click=close_either href="/ui-kit-preview">"Demo"</A>
-            })
-    };
-
-    let pop_up_contact = move || {
-        nav()
-            .class(css::bfh_pop_up, true)
-            .class(css::bfh_pop_up_hidden, move || {
-                !contact_opened()
-            })
-            .child(view! {
-                <h3>"Contacts:"</h3>
-                <A on:click=close_either href="https://t.me/solweo">"Telegram: @solweo"</A>
-                <A on:click=close_either href="mailto:adrian@solweo.tech">"Mail: adrian@solweo.tech"</A>
-            })
-    };
-
-    */
-    
-    // Rethinking
-
-    let pop_up_menu = move || {
-        nav()
-            .class(css::re_pop_up, true)
-            .child(view! {
-                <A class=index::neutral_clickable on:click=close_either href="/">"Home"</A>
-                <A class=index::neutral_clickable on:click=close_either href="/about">"About"</A>
-                <A class=index::neutral_clickable on:click=close_either href="/works">"Works"</A>
-                <A class=index::neutral_clickable on:click=close_either href="/ui-kit-preview">"Demo"</A>
-            })
-    };
-    
-    header()
-        .class(index::medium_context, true)
-        .class(css::re_header_baseline, true)
-        .dyn_classes(move || {
-            let a = match (menu_opened(), contact_opened(), sd()) {
-                // (mo, co, sd)
-                (true, _, _) => css::re_header_expanded,
-                (_, true, _) => css::re_header_expanded,
-                (_, _, Direction::Up) => css::re_header_neutral,
-                (_, _, Direction::Down) => css::re_header_collapsed,
-            };
-            vec![css::re_header_baseline, a]
+    let menu_attr = create_memo(move |_| 
+        menu_opened.with(|v| match *v {
+            true => "exposed",
+            false => "hidden",
         })
-        .child((
-            h1().class(index::neutral_clickable, true).class(css::re_logo, true).child("SOLWEO"),
-            view! {
-                <button
-                    on:click = close_either
-                    class=format!("{} {}", 
-                    index::neutral_clickable,
-                    css::re_close
+    );
+
+    let contact_attr = create_memo(move |_| 
+        contact_opened.with(|v| match *v {
+            true => "exposed",
+            false => "hidden",
+        })
+    );
+
+    let close_attr = create_memo(move |_| 
+        with!(|menu_opened, contact_opened| 
+            if *menu_opened || *contact_opened {
+                return "exposed";
+            } else {
+                return "hidden";
+            }
+        )
+    );
+
+    let bottom_floating_header = move || {
+        view! {
+            <header
+                class=format!("{} {}", 
+                    index::small_context,
+                    css::bottom_floating_header
                 )
-                >"CLOSE"</button>
-            },
-            nav()
-                .class(css::re_nav, true)
-                .child(view! {
+                attr:data-state=header_attr
+            >
+                <A class=format!("{} {}", 
+                    index::neutral_clickable, 
+                    css::bfh_logo
+                )
+                    href="/"
+                    on:click=close_either
+                >"SOLWEO"</A>
+                <nav class=css::bfh_nav>
                     <button
                     on:click = open_menu
                     class=index::neutral_clickable
@@ -141,7 +122,60 @@ pub fn Header() -> impl IntoView {
                         on:click = open_contact
                         class=index::neutral_clickable
                     >"CONTACT"</button>
-                }),
-            pop_up_menu
-        ))
+                </nav>
+            </header>
+        }
+    };
+
+    let bfh_pop_up_menu = move || {
+        view! {
+            <nav
+                class=format!("{} {}", 
+                    index::large_context,
+                    css::bfh_pop_up
+                )
+                attr:data-state=menu_attr
+            >
+                <A class=index::neutral_clickable on:click=close_either href="/">"Home"</A>
+                <A class=index::neutral_clickable on:click=close_either href="/about">"About"</A>
+                <A class=index::neutral_clickable on:click=close_either href="/works">"Works"</A>
+                <A class=index::neutral_clickable on:click=close_either href="/ui-kit-preview">"Demo"</A>
+            </nav>
+        }
+    };
+
+    let bfh_pop_up_contact = move || {
+        view! {
+            <nav
+                class=format!("{} {}", 
+                    index::medium_context,
+                    css::bfh_pop_up
+                )
+                attr:data-state=contact_attr
+            >
+                <h3>"Contacts:"</h3>
+                <A class=index::neutral_clickable on:click=close_either href="https://t.me/solweo">"Telegram: @solweo"</A>
+                <A class=index::neutral_clickable on:click=close_either href="mailto:adrian@solweo.tech">"Mail: adrian@solweo.tech"</A>
+            </nav>
+        }
+    };
+
+    let bfh_pop_up_closer = move || {
+        view! {
+            <div
+                class=format!("{} {}", 
+                    index::small_context,
+                    css::bfh_pop_up_closer
+                )
+                attr:data-state=close_attr
+            >
+                <button
+                    on:click = close_either
+                    class=index::neutral_clickable
+                >"CLOSE"</button>
+            </div>
+        }
+    };
+
+    (bottom_floating_header, bfh_pop_up_menu, bfh_pop_up_contact, bfh_pop_up_closer)
 }

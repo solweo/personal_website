@@ -188,6 +188,7 @@ body {
 		border: none;
         cursor: pointer;
 		margin: 0;
+		padding-block: 0;
 		padding-inline: 0.3rem;
 		text-decoration: none;
 		/* text-transform: uppercase; */
@@ -201,6 +202,7 @@ body {
 		border: none;
 		cursor: pointer;
 		margin: 0;
+		padding-block: 0;
 		padding-inline: 0.3rem;
 		text-decoration: none;
 	}
@@ -214,6 +216,7 @@ body {
     	border-radius: 1rem;
 		cursor: pointer;
 		margin: 0;
+		padding-block: 0;
 		padding-inline: 0.3rem;
 		text-decoration: none;
 	}

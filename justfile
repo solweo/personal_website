@@ -7,9 +7,9 @@ default:
 # Building and serving this site
 dev:
   stylance . --watch & \
-  postcss ./target/stylance-output/bundle.css --use autoprefixer --use postcss-selector-matches --use postcss-selector-not --use postcss-custom-media --use postcss-media-minmax --use postcss-nesting --use postcss-custom-selectors --no-map --output ./index.css --watch --verbose & \
+  postcss ./target/stylance-output/bundle.css --use postcss-mixins --use autoprefixer --use postcss-selector-matches --use postcss-selector-not --use postcss-custom-media --use postcss-media-minmax --use postcss-nesting --use postcss-custom-selectors --no-map --output ./index.css --watch --verbose & \
   trunk serve --open 
 
 build-styles:
   stylance .
-  postcss ./target/stylance-output/bundle.css --use autoprefixer --use postcss-selector-matches --use postcss-selector-not --use postcss-custom-media --use postcss-media-minmax --use postcss-nesting --use postcss-custom-selectors --no-map --output ./index.css
+  postcss ./target/stylance-output/bundle.css --use postcss-mixins --use autoprefixer --use postcss-selector-matches --use postcss-selector-not --use postcss-custom-media --use postcss-media-minmax --use postcss-nesting --use postcss-custom-selectors --no-map --output ./index.css
