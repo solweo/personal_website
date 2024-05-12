@@ -7,11 +7,11 @@ use master_page::*;
 
 use ui_kit::widgets::{LoremImpus, Preview, Header};
 
+pub const BRAND_KEY_MESSAGE: &str = "Embark the realms of tech artistry, art sorcery and product wizardy - thus unleashing your ingenuity!";
+
 #[component]
 pub fn App() -> impl IntoView {
     provide_meta_context();
-
-    // stylance::import_style!(css, "./path/to/local_style.css");
 
     view! {
         <Title text="Solweo"/>
@@ -41,7 +41,6 @@ pub fn App() -> impl IntoView {
                     <Route path="/ui-kit-preview" view=UiKitPreview/>
                 </Routes>
             </main>
-            <LoremImpus/>
         </Router>
     }
 }
@@ -51,6 +50,7 @@ pub fn UiKitPreview() -> impl IntoView {
     view! {
         <h3>"UI kit preview"</h3>
         <Preview/>
+        <LoremImpus/>
         <Outlet/>
     }
 }
