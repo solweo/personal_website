@@ -10,7 +10,10 @@ pub fn WorksList() -> impl IntoView {
             <A href="demo1">"Demo 1"</A>
             <A href="demo2">"Demo 2"</A>
         </div>
-        <Outlet/>
+        <AnimatedOutlet
+            outro="fadeOut"
+            intro="fadeIn"
+        />
     }
 }
 
@@ -29,6 +32,6 @@ pub fn WorkInfo() -> impl IntoView {
     view! {
         <h3>{name}</h3>
         <h3>"Work article page placeholder"</h3>
-        <Outlet/>
+        <AnimatedOutlet/>
     }
 }

@@ -14,6 +14,6 @@ pub fn Home() -> impl IntoView {
         <div class=index::large_context>
             <h1 class=index::title>{BKM}</h1>
         </div>
-        <Outlet/>
+        <AnimatedOutlet/>
     }
 }

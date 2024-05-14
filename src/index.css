@@ -1,0 +1,53 @@
+.fadeIn {
+    animation: .5s cubic-bezier(.76,0,.24,1) fadeIn forwards;
+}
+
+.fadeOut {
+    animation: .5s cubic-bezier(.76,0,.24,1) fadeOut forwards;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes fadeOut {
+    from { opacity: 1;}
+    to { opacity: 0;}
+}
+
+.slideIn {
+    animation: .5s cubic-bezier(.76,0,.24,1) slideIn forwards;
+}
+
+.slideOut {
+    animation: .5s cubic-bezier(.76,0,.24,1) slideOut forwards;
+}
+
+@keyframes slideIn {
+    from { opacity: 0; transform: scale(.9); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes slideOut {
+    from { opacity: 1; transform: scale(1); }
+    to { opacity: 0; transform: scale(.9); }
+}
+
+.slideInBack {
+    animation: .5s cubic-bezier(.76,0,.24,1) slideInBack forwards;
+}
+
+.slideOutBack {
+    animation: .5s cubic-bezier(.76,0,.24,1) slideOutBack forwards;
+}
+
+@keyframes slideInBack {
+    from { opacity: 0; transform: scale(.9); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes slideOutBack {
+    from { opacity: 1; transform: scale(1); }
+    to { opacity: 0; transform: scale(.9); }
+}
