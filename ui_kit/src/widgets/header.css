@@ -11,7 +11,9 @@
     box-shadow: 0 0 40px var(--beige-100);
     border-radius: 1.15rem;
     padding: 0.2rem;
-    background-color: white;
+    background-color: var(--beige-80);
+    backdrop-filter: blur(0.1rem);
+    -webkit-backdrop-filter: blur(0.1rem);
 
     display: flex;
     flex-direction: row;
@@ -101,7 +103,9 @@
     border: 0.1rem solid var(--opposed-neutral-100);
     box-shadow: 0 0 40px var(--beige-100);
     border-radius: 1.15rem;
-    background-color: white;
+    background-color: var(--beige-80);
+    backdrop-filter: blur(0.1rem);
+    -webkit-backdrop-filter: blur(0.1rem);
 
     width: max-content;
     height: 20rem;
@@ -136,7 +140,9 @@
     box-shadow: 0 0 40px var(--beige-100);
     border-radius: 1.15rem;
     padding: 0.2rem;
-    background-color: white;
+    background-color: var(--beige-80);
+    backdrop-filter: blur(0.1rem);
+    -webkit-backdrop-filter: blur(0.1rem);
 
     display: flex;
     flex-direction: row;
