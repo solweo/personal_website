@@ -17,6 +17,7 @@ console_error_panic_hook = "0.1.7"
 console_log = "1"
 log = "0.4"
 ui_kit = { path = "./ui_kit"}
+pulldown-cmark = "0.10.3"
 
 [package.metadata.stylance]
 output_file = "./target/stylance-output/bundle.css"
