@@ -1,8 +1,6 @@
 use leptos::*;
 use stylance::import_style as get_css;
 
-use super::WidgetState;
-
 get_css!(css, "./buttons.css");
 
 #[component]

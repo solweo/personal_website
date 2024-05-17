@@ -1,11 +1,11 @@
 use leptos::*;
-use stylance::import_style as get_css;
 
 mod buttons;
 mod header;
 
 pub use buttons::*;
 pub use header::*;
+pub use super::index;
 
 #[allow(dead_code)]
 pub enum WidgetState {
@@ -35,8 +35,6 @@ pub fn LoremImpus() -> impl IntoView {
 
 #[component]
 pub fn Preview() -> impl IntoView {
-    get_css!(index, "./index.css");
-
     view! {
         <NeumorphicButton/>
         <div class=index::large_context>

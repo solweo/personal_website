@@ -1,14 +1,10 @@
-use leptos::{html::{button, h1, h3, header, nav}, *};
-use leptos_meta::*;
+use leptos::*;
 use leptos_router::*;
 use leptos_use::*;
 use stylance::import_style as get_css;
-use web_sys::MouseEvent;
 
-use super::WidgetState;
-
+use super::index;
 get_css!(css, "./header.css");
-get_css!(index, "../index.css");
 
 #[derive(PartialEq, Debug)]
 enum Direction {
@@ -49,9 +45,9 @@ pub fn Header() -> impl IntoView {
     let (menu_opened, set_menu_opened) = create_signal(false);
     let (contact_opened, set_contact_opened) = create_signal(false);
 
-    let open_menu = move |_: MouseEvent| set_menu_opened.update(|v| *v = true);
-    let open_contact = move |_: MouseEvent| set_contact_opened.update(|v| *v = true);
-    let close_either = move |_: MouseEvent| {
+    let open_menu = move |_| set_menu_opened.update(|v| *v = true);
+    let open_contact = move |_| set_contact_opened.update(|v| *v = true);
+    let close_either = move |_| {
         set_contact_opened.update(|v| *v = false);
         set_menu_opened.update(|v| *v = false);
     };

@@ -1,44 +1,66 @@
-[package]
-name = "personal_website"
-version = "0.1.0"
-edition = "2021"
-authors = ["Adrian Alekseev"]
-repository = "https://github.com/solweo/personal_website"
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
-[dependencies]
-leptos = { version = "0.6.11", features = ["nightly", "csr"] }
-leptos_router = { version = "0.6.11", features = ["nightly", "csr"] }
-leptos_meta = { version = "0.6.11", features = ["nightly", "csr"] }
+[workspace]
+resolver = "2"
+members = [
+    "front/ui_kit", 
+    "front/app", 
+    "front/init", 
+    "server"
+]
+
+[profile.release]
+codegen-units = 1
+lto = true
+opt-level = 'z'
+
+[workspace.dependencies]
+leptos = { version = "0.6", features = ["nightly"] }
+leptos_meta = { version = "0.6", features = ["nightly"] }
+leptos_router = { version = "0.6", features = ["nightly"] }
+leptos_axum = { version = "0.6" }
+
+axum = "0.7"
+cfg-if = "1"
+console_error_panic_hook = "0.1.7"
+console_log = "1"
+http = "1"
+log = "0.4.20"
+simple_logger = "5"
+thiserror = "1"
+tokio = { version = "1.33.0", features = ["full"] }
+tower = { version = "0.4.13", features = ["full"] }
+tower-http = { version = "0.5", features = ["full"] }
+wasm-bindgen = "=0.2.92"
+
 leptos-use = "0.10.7"
 stylance = { version = "0.3.0", features = ["nightly"] }
 gloo-timers = { version = "0.3.0", features = ["futures"] }
 uuid = { version = "1", features = ["v4"] }
-console_error_panic_hook = "0.1.7"
-console_log = "1"
-log = "0.4"
-ui_kit = { path = "./ui_kit"}
-pulldown-cmark = "0.10.3"
+pulldown-cmark = "0.11"
 
-[package.metadata.stylance]
+[[workspace.metadata.stylance]]
 output_file = "./target/stylance-output/bundle.css"
 output_dir = "./target/"
 extensions = [".css"]
 folders = ["./src", "./ui_kit"]
 class_name_pattern = "[name]"
 
-[workspace]
-resolver = "2"
-members = [
-  # utilities 
-
-  # core
-  "ui_kit",
-
-  # integrations
-
-  # libraries
-]
-exclude = ["works"]
-
-[workspace.package]
-version = "0.1.0"
+# See https://github.com/akesson/cargo-leptos for documentation of all the parameters.
+[[workspace.metadata.leptos]]
+name = "start-axum-workspace"
+bin-package = "server"
+lib-package = "init"
+site-root = "target/site"
+site-pkg-dir = "pkg"
+style-file = "index.css"
+assets-dir = "assets"
+site-addr = "127.0.0.1:3000"
+reload-port = 3001
+browserquery = "defaults"
+watch = false
+env = "DEV"
+bin-features = []
+bin-default-features = false
+lib-features = []
+lib-default-features = false
