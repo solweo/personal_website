@@ -1,4 +1,4 @@
-use app::*;
+use front::*;
 use axum::Router;
 use fileserv::file_and_error_handler;
 use leptos::*;

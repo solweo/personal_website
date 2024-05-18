@@ -1,5 +1,5 @@
 [package]
-name = "init"
+name = "lib_init"
 version = "0.1.0"
 edition = "2021"
 description = "App initialization on client"
@@ -8,7 +8,7 @@ description = "App initialization on client"
 crate-type = ["cdylib", "rlib"]
 
 [dependencies]
-app = { path = "../app", default-features = false, features = ["hydrate"] }
+front = { path = "../front", default-features = false, features = ["hydrate"] }
 leptos = { workspace = true, features = [ "hydrate" ] }
 
 console_error_panic_hook.workspace = true

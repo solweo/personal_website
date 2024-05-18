@@ -1,4 +1,4 @@
-use app::*;
+use front::*;
 use leptos::*;
 use wasm_bindgen::prelude::wasm_bindgen;
 

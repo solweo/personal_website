@@ -3,10 +3,11 @@
 [workspace]
 resolver = "2"
 members = [
-    "front/ui_kit", 
-    "front/app", 
-    "front/init", 
-    "server"
+    "bin_init",
+    "server",
+    "lib_init",
+    "front",
+    "ui_kit",
 ]
 
 [profile.release]
@@ -39,6 +40,14 @@ gloo-timers = { version = "0.3.0", features = ["futures"] }
 uuid = { version = "1", features = ["v4"] }
 pulldown-cmark = "0.11"
 
+serde = { version = "1.0", features = ["derive"] }
+tracing = "0.1"
+gloo-net = { version = "0.5", features = ["http"] }
+reqwest = { version = "0.12", features = ["json"] }
+lazy_static = "1.4.0"
+bcrypt = "0.15"
+async-trait = "0.1"
+
 [[workspace.metadata.stylance]]
 output_file = "./target/stylance-output/bundle.css"
 output_dir = "./target/"
@@ -49,8 +58,8 @@ class_name_pattern = "[name]"
 # See https://github.com/akesson/cargo-leptos for documentation of all the parameters.
 [[workspace.metadata.leptos]]
 name = "start-axum-workspace"
-bin-package = "server"
-lib-package = "init"
+bin-package = "bin_init"
+lib-package = "lib_init"
 site-root = "target/site"
 site-pkg-dir = "pkg"
 style-file = "index.css"

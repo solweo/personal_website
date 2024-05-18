@@ -1,4 +1,4 @@
-use app::App;
+use front::App;
 use axum::response::Response as AxumResponse;
 use axum::{
     body::Body,

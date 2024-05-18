@@ -135,7 +135,7 @@ pub fn Header() -> impl IntoView {
                 <A class=index::neutral_clickable on:click=close_either href="/">"Home"</A>
                 <A class=index::neutral_clickable on:click=close_either href="/about">"About"</A>
                 <A class=index::neutral_clickable on:click=close_either href="/works">"Works"</A>
-                <A class=index::neutral_clickable on:click=close_either href="/ui-kit-preview">"Demo"</A>
+                <A class=index::neutral_clickable on:click=close_either href="/playground">"Demo"</A>
             </nav>
         }
     };

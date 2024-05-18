@@ -2,15 +2,28 @@
 name = "server"
 version = "0.1.0"
 edition = "2021"
+description = ""
 
 [dependencies]
-app = { path = "../front/app", default-features = false, features = ["ssr"] }
-leptos = { workspace = true, features = [ "ssr" ]}
-leptos_axum.workspace = true
 
-axum.workspace = true
-simple_logger.workspace = true
-tokio.workspace = true
-tower.workspace = true
-tower-http.workspace = true
+leptos.workspace = true
+leptos_meta.workspace = true
+leptos_router.workspace = true
+leptos_axum = { workspace = true, optional = true }
+
+http.workspace = true
+cfg-if.workspace = true
+thiserror.workspace = true
+
+serde.workspace = true
+lazy_static.workspace = true
+reqwest.workspace = true
 log.workspace = true
+
+pulldown-cmark.workspace = true
+
+[features]
+default = []
+hydrate = ["leptos/hydrate", "leptos_meta/hydrate", "leptos_router/hydrate"]
+ssr = ["leptos/ssr", "leptos_meta/ssr", "leptos_router/ssr", "dep:leptos_axum"]
+

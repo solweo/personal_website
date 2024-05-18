@@ -1,11 +1,12 @@
 [package]
-name = "app"
+name = "front"
 version = "0.1.0"
 edition = "2021"
 description = "Clant-side application"
 
 [dependencies]
 ui_kit = { path = "../ui_kit" }
+server = { path = "../server" }
 
 leptos.workspace = true
 leptos_meta.workspace = true
