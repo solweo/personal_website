@@ -66,9 +66,6 @@ pub enum ArticleError {
 pub async fn fetch_article(id: i32) -> Result<Article, ServerFnError> {
     println!("Called `fetch_article`");
 
-    // fake API delay
-    // std::thread::sleep(std::time::Duration::from_millis(1250));
-
     let mut options = Options::empty();
     options.insert(Options::ENABLE_TABLES);
     options.insert(Options::ENABLE_STRIKETHROUGH);
@@ -76,13 +73,6 @@ pub async fn fetch_article(id: i32) -> Result<Article, ServerFnError> {
     let parser = pulldown_cmark::Parser::new(MARKDOWN_SOURCE);
     let mut html_output = String::new();
     pull_mark::push_html(&mut html_output, parser);
-    // leptos::logging::log!("{}", html_output);
-    
-    // Ok(Article {
-    //     id: "yuvOBfTQ_bw".to_string(),
-    //     title: "Markdown Layout Test".to_string(),
-    //     content: "Article text".to_string(),
-    // })
 
     Ok(Article {
         id: "yuvOBfTQ_bw".to_string(),

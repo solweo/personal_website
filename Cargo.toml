@@ -57,7 +57,7 @@ class_name_pattern = "[name]"
 
 # See https://github.com/akesson/cargo-leptos for documentation of all the parameters.
 [[workspace.metadata.leptos]]
-name = "start-axum-workspace"
+name = "site"
 bin-package = "bin_init"
 lib-package = "lib_init"
 site-root = "target/site"

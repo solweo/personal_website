@@ -36,17 +36,7 @@ pub fn ExactWork() -> impl IntoView {
 
 #[component]
 pub fn DemoWork() -> impl IntoView {
-    // let mut options = Options::empty();
-    // options.insert(Options::ENABLE_TABLES);
-    // options.insert(Options::ENABLE_STRIKETHROUGH);
-    // options.insert(Options::ENABLE_TASKLISTS);
-    // let parser = pulldown_cmark::Parser::new(MARKDOWN_SOURCE);
-    // let mut html_output = String::new();
-    // pull_mark::push_html(&mut html_output, parser);
-    // leptos::logging::log!("{}", html_output);
-    
     view! {
         <h3>"Work article page placeholder"</h3>
-        // <div inner_html=html_output></div>
     }
 }

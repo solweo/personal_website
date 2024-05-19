@@ -92,21 +92,3 @@
         }
     }
 }
-
-/* ---------------- */
-
-.primary-button-initial {
-    background-color: red;
-}
-
-.secondary-button-initial {
-    background-color:darkorchid;
-}
-
-.flat-button-initial {
-    background-color: blue;
-}
-
-.icon-button-initial {
-    background-color: chartreuse;
-}
