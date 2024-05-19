@@ -18,7 +18,11 @@ pub fn App() -> impl IntoView {
     provide_meta_context();
 
     view! {
-        <Stylesheet id="leptos" href="/pkg/start-axum-workspace.css"/>
+        // <Stylesheet id="leptos" href="/pkg/start-axum-workspace.css"/>
+
+        <Stylesheet id="leptos" href="/ui_kit.css"/>
+        // <Stylesheet id="leptos" href="/front.css"/>
+        <link rel="stylesheet" id="leptos" href="/front.css"/>
 
         <Title text="Solweo"/>
 

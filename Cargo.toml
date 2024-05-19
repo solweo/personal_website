@@ -49,10 +49,10 @@ bcrypt = "0.15"
 async-trait = "0.1"
 
 [[workspace.metadata.stylance]]
-output_file = "./target/stylance-output/bundle.css"
-output_dir = "./target/"
+output_file = "../target/stylance-output/bundle.css"
+output_dir = "../target/"
 extensions = [".css"]
-folders = ["./src", "./ui_kit"]
+folders = ["../front", "../ui_kit"]
 class_name_pattern = "[name]"
 
 # See https://github.com/akesson/cargo-leptos for documentation of all the parameters.
@@ -62,7 +62,6 @@ bin-package = "bin_init"
 lib-package = "lib_init"
 site-root = "target/site"
 site-pkg-dir = "pkg"
-style-file = "index.css"
 assets-dir = "assets"
 site-addr = "127.0.0.1:3000"
 reload-port = 3001

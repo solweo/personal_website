@@ -21,8 +21,9 @@ leptos-use.workspace = true
 stylance.workspace = true
 
 [package.metadata.stylance]
+output_file = "../target/stylance-output/front.css"
+output_dir = "../target/"
 extensions = [".css"]
-folders = ["./src"]
 class_name_pattern = "[name]"
 
 [features]
