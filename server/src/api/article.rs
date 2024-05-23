@@ -4,7 +4,7 @@ use leptos_router::*;
 use serde::{Deserialize, Serialize};
 use thiserror::Error;
 // use comrak::{markdown_to_html, Options};
-use comrak::*;
+use comrak::{plugins::syntect::SyntectAdapterBuilder, *};
 
 static MARKDOWN_SOURCE: &str = r#"---                                                                            
 title: 'Some title'                                                         
@@ -74,34 +74,6 @@ pub enum ArticleError {
 pub async fn fetch_article(id: i32) -> Result<Article, ServerFnError> {
     println!("Called `fetch_article`");
 
-    // let mut options = Options::empty();
-    // options.insert(Options::ENABLE_TABLES);
-    // options.insert(Options::ENABLE_STRIKETHROUGH);
-    // options.insert(Options::ENABLE_TASKLISTS);
-    // let parser = pulldown_cmark::Parser::new(MARKDOWN_SOURCE);
-    // let mut html_output = String::new();
-    // pull_mark::push_html(&mut html_output, parser);
-
-    // comrak
-
-    // let a = ExtensionOptions {
-    //     strikethrough: true,
-    //     tagfilter: true,
-    //     table: true,
-    //     autolink: true,
-    //     tasklist: true,
-    //     superscript: true,
-    //     header_ids: true,
-    //     footnotes: true,
-    //     description_lists: true,
-    //     front_matter_delimiter: true,
-    //     multiline_block_quotes: true,
-    //     math_dollars: true,
-    //     math_code: true,
-    //     wikilinks_title_after_pipe: true,
-    //     wikilinks_title_before_pipe: true,
-    // };
-
     let extension = ExtensionOptionsBuilder::default()
         .strikethrough(true)
         .tagfilter(true)
@@ -135,7 +107,14 @@ pub async fn fetch_article(id: i32) -> Result<Article, ServerFnError> {
         ..Options::default()
     };
 
-    let html_output = markdown_to_html(MARKDOWN_SOURCE, &options);
+    let builder = SyntectAdapterBuilder::new().theme("base16-ocean.dark");
+    // let builder = SyntectAdapterBuilder::new().css();
+    let adapter = builder.build();
+    let mut plugins = Plugins::default();
+
+    plugins.render.codefence_syntax_highlighter = Some(&adapter);
+
+    let html_output = markdown_to_html_with_plugins(MARKDOWN_SOURCE, &options, &plugins);
 
     Ok(Article {
         id: "yuvOBfTQ_bw".to_string(),
