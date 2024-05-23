@@ -6,12 +6,20 @@ use thiserror::Error;
 use pulldown_cmark::{html as pull_mark, Options, Parser};
 
 static MARKDOWN_SOURCE: &str = r#"
+---                                                                            
+title: 'Some title'                                                         
+description: 'Some description'     
+aliases: ['some alias', 'another alias']          
+---  
+
 ## Code
 ```rust
 fn main() {
     println!("hello world !")
 }
 ```
+
+---
 
 ## Math
 - $1+1=2$
