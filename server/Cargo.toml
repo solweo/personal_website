@@ -20,7 +20,7 @@ lazy_static.workspace = true
 reqwest.workspace = true
 log.workspace = true
 
-pulldown-cmark.workspace = true
+comrak.workspace = true
 
 [features]
 default = []
