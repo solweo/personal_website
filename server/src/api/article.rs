@@ -1,61 +1,10 @@
-use std::borrow::Borrow;
-
 use leptos::{server_fn::error::NoCustomError, *};
 use leptos_meta::*;
 use leptos_router::*;
 use serde::{Deserialize, Serialize};
 use thiserror::Error;
-// use comrak::{markdown_to_html, Options};
-use comrak::nodes::{AstNode, NodeValue};
 use comrak::{plugins::syntect::SyntectAdapterBuilder, *};
 use yaml_front_matter::YamlFrontMatter;
-
-static MARKDOWN_SOURCE: &str = r#"---
-title: 'Some title'
-description: 'Some description'
-aliases: ['some alias', 'another alias']
----
-
-## Code
-```rust
-fn main() {
-    println!("hello world !")
-}
-```
-
----
-
-## Math
-- $1+1=2$
-- $e^{i\pi}+1=0$
-
-$$\int_0^{+\infty}\dfrac{\sin(t)}{t}\,dt=\dfrac{\sqrt{\pi}}{2}$$
-
-## Links and images
-![example.org](https://example.org/)
-
-## Style
-| unstyled | styled    |
-| :-----:  | ------    |
-| bold     | **bold**  |
-| italics  | *italics* |
-| strike   | ~strike~  |
-
-> Hey, I am a quote !
-
-## Lists
-1) one
-2) two
-3) three
-
-- and
-- unorderded
-- too
-
-Even todo lists:
-- [ ] todo
-- [x] done
-"#;
 
 #[derive(Debug, Deserialize, Serialize, PartialEq, Eq, Clone)]
 pub struct Article {
@@ -81,10 +30,16 @@ pub enum ArticleError {
     ServerError,
 }
 
+async fn fetch_markdown_from_cdn(url: &str) -> Result<String, reqwest::Error> {
+    let response = reqwest::get(url).await?;
+    let text = response.text().await?;
+    Ok(text)
+}
+
 #[server]
 pub async fn fetch_article(id: i32) -> Result<Article, ServerFnError> {
     println!("Called `fetch_article`");
-
+    
     let extension = ExtensionOptionsBuilder::default()
         .strikethrough(true)
         .tagfilter(true)
@@ -118,7 +73,10 @@ pub async fn fetch_article(id: i32) -> Result<Article, ServerFnError> {
         ..Options::default()
     };
 
-    let result = YamlFrontMatter::parse::<Metadata>(MARKDOWN_SOURCE).unwrap();
+    let markdown_source = fetch_markdown_from_cdn("http://cdn.solweo.tech/test_article.md").await;
+    println!("MD: {:?}", markdown_source);
+
+    let result = YamlFrontMatter::parse::<Metadata>(&markdown_source.unwrap()).unwrap();
 
     let Metadata {
         title,
