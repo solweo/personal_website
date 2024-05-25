@@ -21,6 +21,7 @@ reqwest.workspace = true
 log.workspace = true
 
 comrak.workspace = true
+yaml-front-matter.workspace = true
 
 [features]
 default = []

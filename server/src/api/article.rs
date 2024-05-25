@@ -1,16 +1,20 @@
+use std::borrow::Borrow;
+
 use leptos::{server_fn::error::NoCustomError, *};
 use leptos_meta::*;
 use leptos_router::*;
 use serde::{Deserialize, Serialize};
 use thiserror::Error;
 // use comrak::{markdown_to_html, Options};
+use comrak::nodes::{AstNode, NodeValue};
 use comrak::{plugins::syntect::SyntectAdapterBuilder, *};
+use yaml_front_matter::YamlFrontMatter;
 
-static MARKDOWN_SOURCE: &str = r#"---                                                                            
-title: 'Some title'                                                         
-description: 'Some description'     
-aliases: ['some alias', 'another alias']          
----  
+static MARKDOWN_SOURCE: &str = r#"---
+title: 'Some title'
+description: 'Some description'
+aliases: ['some alias', 'another alias']
+---
 
 ## Code
 ```rust
@@ -60,6 +64,13 @@ pub struct Article {
     pub content: String,
 }
 
+#[derive(Debug, Deserialize, Clone)]
+struct Metadata {
+    title: String,
+    description: String,
+    aliases: Vec<String>,
+}
+
 #[derive(Error, Debug, Copy, Clone, PartialEq, Eq, Serialize, Deserialize)]
 pub enum ArticleError {
     #[error("Invalid post ID.")]
@@ -107,6 +118,14 @@ pub async fn fetch_article(id: i32) -> Result<Article, ServerFnError> {
         ..Options::default()
     };
 
+    let result = YamlFrontMatter::parse::<Metadata>(MARKDOWN_SOURCE).unwrap();
+
+    let Metadata {
+        title,
+        description,
+        aliases,
+    } = result.metadata;
+
     let builder = SyntectAdapterBuilder::new().theme("base16-ocean.dark");
     // let builder = SyntectAdapterBuilder::new().css();
     let adapter = builder.build();
@@ -114,11 +133,11 @@ pub async fn fetch_article(id: i32) -> Result<Article, ServerFnError> {
 
     plugins.render.codefence_syntax_highlighter = Some(&adapter);
 
-    let html_output = markdown_to_html_with_plugins(MARKDOWN_SOURCE, &options, &plugins);
+    let html_output = markdown_to_html_with_plugins(&result.content, &options, &plugins);
 
     Ok(Article {
         id: "yuvOBfTQ_bw".to_string(),
-        title: "Markdown Layout Test".to_string(),
+        title,
         content: html_output,
     })
 }
