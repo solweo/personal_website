@@ -1,17 +1,25 @@
-use crate::error_page::{AppError, DisplayError};
+pub mod error_page;
+pub mod master_pages;
+pub mod animated_show_switch;
+pub mod animated_suspense;
+pub mod delayed_value;
 
+use std::time::Duration;
+use std::rc::Rc;
 use leptos::*;
 use leptos_meta::*;
 use leptos_router::*;
-use leptos::logging::log;
-
-pub mod error_page;
-pub mod master_pages;
-
+use leptos::logging::log as client_log;
 use ui_kit::widgets::*;
-use master_pages::*;
+use server::{api::*, error::ErrorOn};
 
-use server::{api::article::*, *};
+use crate::{
+    error_page::{AppError, DisplayError},
+    animated_show_switch::AnimatedShowSwitch,
+    animated_suspense::AnimatedSuspense,
+    delayed_value::DelayedValue,
+    master_pages::*,
+};
 
 #[component]
 pub fn App() -> impl IntoView {
@@ -19,7 +27,7 @@ pub fn App() -> impl IntoView {
 
     view! {
         <Stylesheet id="leptos" href="/ui_kit.css"/>
-        <link rel="stylesheet" id="leptos" href="/front.css"/>
+        <link id="leptos" rel="stylesheet" href="/front.css"/>
 
         <Title text="Solweo"/>
 
@@ -56,58 +64,69 @@ pub fn App() -> impl IntoView {
 #[component]
 pub fn Playground() -> impl IntoView {
     let (count, set_count) = create_signal(0);
-    let on_click = move |_| set_count.update(|count| *count += 1);
+    let on_click = move |_| set_count.update(|count| *count += 1); // <- res.refetch()
 
-    let res = create_resource(count, fetch_foo);
-    let art = create_resource(count, fetch_article);
+    let async_data = create_resource(count, fetch_boo);
 
+    let count_delayer_container = DelayedValue::default();
+    let delayed_count = count_delayer_container.queue(Duration::from_millis(1000), Rc::new(count));
+
+    let actual_data = create_rw_signal(String::new());
+    let delayed_actual_data_container = DelayedValue::default();
+    let delayed_actual_data = delayed_actual_data_container.queue(Duration::from_millis(250), Rc::new(actual_data));
+    
     view! {
         <h3>"UI kit preview"</h3>
         <button on:click=on_click>"Click Me: " {count}</button>
 
-        <Suspense
-            fallback = move || view! { <h3>"Loading"</h3> }
+        <h1>"Count: " {count}</h1>
+        <h1>"Delayed count: " {delayed_count}</h1>
+
+        <AnimatedSuspense
+            intro="fadeIn"
+            outro="fadeOut"
+            fallback_intro="fadeIn"
+            fallback_outro="fadeOut"
+            delay=Duration::from_millis(250)
+            fallback=move || view! { <p>"Loading..."</p> }
         >
-            <ErrorBoundary fallback=|errors| {
-                view! {<h3>"An error occurred while fetching data"</h3>}
-            }>
-                {
-                    log!("Resource: {:?}", res);
-                    move || {
-                    res.get().map(|r|
-                        r.map(|v| view! {
-                            <h3>"Here the data: "{v}</h3>
-                        }.into_view())
-                    )
-                }}
-            </ErrorBoundary>
-        </Suspense>
+            <h5>"Retrived Data"</h5>
+            {move || {
+                async_data.and_then(|d| {
+                    actual_data.set(d.clone());
+                    view! { <p>"A Data: "{delayed_actual_data}</p> }
+                })
+            }}
+            // {move || {
+            //     async_data.get()
+            //         .map(|a| view! { <p>"A Data: "{a}</p> })
+            // }}
+        </AnimatedSuspense>
 
-        <br/>
+        // <AnimatedShowSwitch
+        //     when=async_data.loading()
+        //     intro="fadeIn"
+        //     outro="fadeOut"
+        //     fallback_intro="fadeIn"
+        //     fallback_outro="fadeOut"
+        //     delay=Duration::from_millis(250)
+        //     fallback=move || view! { 
+        //         // <Suspense>
+        //             <h5>"Retrived Data"</h5>
+        //             {move || {
+        //                 async_data.get()
+        //                     .map(|a| view! { <p>"A Data: "{a}</p> })
+        //             }}
+        //         // </Suspense>
+        //         // <h5>"Retrived Data"</h5>
+        //     }
+        // >
+        //     <p>"Loading..."</p>
+        // </AnimatedShowSwitch>
 
-        <Suspense
-            fallback = move || view! { <h3>"Articel is Loading"</h3> }
-        >
-            <ErrorBoundary fallback=|errors| {
-                view! {<h3>"An error occurred while fetching Article"</h3>}
-            }>
-                {
-                    move || {
-                    art.get().map(|r|
-                        r.map(|v| view! {
-                            <h3>"Id: "{v.id}</h3>
-                            <h3>"Title: "{v.title}</h3>
-                            <h3>"Text:"</h3>
-                            <div inner_html=v.content></div>
-                        }.into_view())
-                    )
-                }}
-            </ErrorBoundary>
-        </Suspense>
-
-        <br/>
+        // <br/>
         <Preview/>
-        <LoremImpus/>
+        // <LoremImpus/>
         <AnimatedOutlet/>
     }
 }

@@ -1,10 +1,17 @@
 use front::*;
-use axum::Router;
+use axum::{
+    routing::get,
+    Router,
+};
 use fileserv::file_and_error_handler;
 use leptos::*;
 use leptos_axum::{generate_route_list, LeptosRoutes};
 
-pub mod fileserv;
+mod fileserv;
+mod handle_leptos;
+
+use server::state::{AppState, ArticleParser};
+use handle_leptos::*;
 
 #[tokio::main]
 async fn main() {
@@ -16,13 +23,23 @@ async fn main() {
     let addr = leptos_options.site_addr;
     let routes = generate_route_list(App);
 
-    // build our application with a route
-    let app = Router::new()
-        .leptos_routes(&leptos_options, routes, App)
-        .fallback(file_and_error_handler)
-        .with_state(leptos_options);
+    let app_state = AppState {
+        leptos_options,
+        md_parser: ArticleParser::default(),
+        reqwest_client: reqwest::Client::builder().build().unwrap(),
+    };
 
-    // run our app with hyper
+    // build application with a route
+    let app = Router::new()
+        .route(
+            "/api/*fn_name",
+            get(server_fn_handler).post(server_fn_handler),
+        )
+        .leptos_routes_with_handler(routes, get(leptos_routes_handler))
+        .fallback(file_and_error_handler)
+        .with_state(app_state);
+
+    // run app with hyper
     // `axum::Server` is a re-export of `hyper::Server`
     log::info!("listening on http://{}", &addr);
     let listener = tokio::net::TcpListener::bind(addr).await.unwrap();

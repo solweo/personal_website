@@ -1,7 +1,6 @@
 ---
-title: 'Some title'
-description: 'Some description'
 aliases: ['some alias', 'another alias']
+description: 'Some description'
 ---
 
 ## Code
