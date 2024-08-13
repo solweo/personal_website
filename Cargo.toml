@@ -2,8 +2,9 @@
 resolver = "2"
 members = [
     "init",
+    "server",
     "front",
-    # "server",
+    "ui_kit",
 ]
 
 [workspace.dependencies]

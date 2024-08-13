@@ -8,6 +8,8 @@ use leptos_router::*;
 use stylance::import_style as get_css;
 get_css!(index, "./index.css");
 
+use ui_kit::style_baseline;
+
 #[component]
 pub fn App() -> impl IntoView {
     // Provides context that manages stylesheets, titles, meta tags, etc.
@@ -18,7 +20,8 @@ pub fn App() -> impl IntoView {
 
         // injects a stylesheet into the document <head>
         // id=leptos means cargo-leptos will hot-reload this stylesheet
-        <Stylesheet id="leptos" href="/front.css"/>
+        <Stylesheet id="leptos" href="/ui_kit.css"/>
+        <link id="leptos" rel="stylesheet" href="/front.css"/>
 
         // sets the document title
         <Title text="Welcome to Leptos"/>
@@ -50,6 +53,6 @@ fn HomePage() -> impl IntoView {
 
     view! {
         <h1 class=index::hello>"Welcome to Leptos!"</h1>
-        <button on:click=on_click>"Click Me: " {count}</button>
+        <button class=style_baseline::normal on:click=on_click>"Click Me: " {count}</button>
     }
 }

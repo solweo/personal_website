@@ -1,27 +1,27 @@
 [package]
-name = "front"
+name = "ui_kit"
 version = "0.1.0"
 edition = "2021"
-description = ""
+description = "A collection of UI components"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-# server = { path = "../server" }
-ui_kit = { path = "../ui_kit" }
+
 leptos.workspace = true
 leptos_meta.workspace = true
 leptos_router.workspace = true
 leptos_axum = { workspace = true, optional = true }
-leptos_macro.workspace = true
-leptos_reactive.workspace = true
-gloo-timers.workspace = true
+
 http.workspace = true
 cfg-if.workspace = true
 thiserror.workspace = true
+
 leptos-use.workspace = true
 stylance.workspace = true
 
 [package.metadata.stylance]
-output_file = "../target/stylance-output/front.css"
+output_file = "../target/stylance-output/ui_kit.css"
 output_dir = "../target/"
 extensions = [".css"]
 class_name_pattern = "[name]"
@@ -31,8 +31,7 @@ default = []
 hydrate = [
     "leptos/hydrate", 
     "leptos_meta/hydrate", 
-    "leptos_router/hydrate",
-    "ui_kit/hydrate"
+    "leptos_router/hydrate"
 ]
 ssr = [
     "leptos/ssr", 
@@ -40,7 +39,5 @@ ssr = [
     "leptos-use/axum", 
     "leptos_meta/ssr", 
     "leptos_router/ssr", 
-    "dep:leptos_axum",
-    "ui_kit/ssr"
+    "dep:leptos_axum"
 ]
-
