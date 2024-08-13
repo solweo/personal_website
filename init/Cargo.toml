@@ -1,0 +1,51 @@
+[package]
+name = "init"
+version = "0.1.0"
+edition = "2021"
+description = ""
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+
+[dependencies]
+front = { path = "../front" }
+server = { path = "../server" }
+axum = { workspace = true, optional = true }
+console_error_panic_hook.workspace = true
+leptos.workspace = true
+leptos_axum = { workspace = true, optional = true }
+leptos_meta.workspace = true
+leptos_router.workspace = true
+tokio = { workspace = true, optional = true }
+tower = { workspace = true, optional = true }
+tower-http = { workspace = true, optional = true }
+wasm-bindgen.workspace = true
+thiserror.workspace = true
+tracing = { workspace = true, optional = true }
+http.workspace = true
+log.workspace = true
+reqwest.workspace = true
+simple_logger.workspace = true
+
+[features]
+default = []
+hydrate = [
+    "leptos/hydrate", 
+    "leptos_meta/hydrate", 
+    "leptos_router/hydrate",
+    "front/hydrate",
+    "server/hydrate"
+]
+ssr = [
+    "dep:axum",
+    "dep:tokio",
+    "dep:tower",
+    "dep:tower-http",
+    "dep:leptos_axum",
+    "leptos/ssr",
+    "leptos_meta/ssr",
+    "leptos_router/ssr",
+    "dep:tracing",
+    "front/ssr",
+    "server/ssr",
+]

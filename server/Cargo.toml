@@ -5,22 +5,18 @@ edition = "2021"
 description = ""
 
 [dependencies]
-
 leptos.workspace = true
 leptos_meta.workspace = true
 leptos_router.workspace = true
 leptos_axum = { workspace = true, optional = true }
-
 axum = { workspace = true, optional = true }
 http.workspace = true
 cfg-if.workspace = true
 thiserror.workspace = true
-
 serde.workspace = true
 lazy_static.workspace = true
 reqwest.workspace = true
 log.workspace = true
-
 comrak.workspace = true
 yaml-front-matter.workspace = true
 

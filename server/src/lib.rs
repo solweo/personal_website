@@ -1,4 +1,4 @@
-pub mod api;
-pub mod error;
-#[cfg(feature = "ssr")]
-pub mod state;
+cfg_if::cfg_if! { if #[cfg(feature = "ssr")] {
+    pub mod state;
+    pub mod article_parser;
+}}

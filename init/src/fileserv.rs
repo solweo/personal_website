@@ -38,7 +38,7 @@ async fn get_static_file(uri: Uri, root: &str) -> Result<Response<Body>, (Status
         Ok(res) => Ok(res.map(Body::new)),
         Err(err) => Err((
             StatusCode::INTERNAL_SERVER_ERROR,
-            format!("Something went wrong: {err}"),
+            format!("Error serving files: {err}"),
         )),
     }
 }

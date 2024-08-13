@@ -1,20 +1,20 @@
-use front::*;
-use axum::{
-    routing::get,
-    Router,
-};
-use fileserv::file_and_error_handler;
-use leptos::*;
-use leptos_axum::{generate_route_list, LeptosRoutes};
-
-mod fileserv;
-mod handle_leptos;
-
-use server::state::{AppState, ArticleParser};
-use handle_leptos::*;
-
+#[cfg(feature = "ssr")]
 #[tokio::main]
 async fn main() {
+    use axum::{
+        routing::get,
+        Router,
+    };
+    use leptos::*;
+    use leptos_axum::{generate_route_list, LeptosRoutes};
+    use front::App;
+    use server::{
+        state::AppState, 
+        article_parser::ArticleParser
+    };
+    use init::fileserv::file_and_error_handler;
+    use init::handle_leptos::*;
+
     simple_logger::init_with_level(log::Level::Debug).expect("couldn't initialize logging");
 
     // Setting get_configuration(None) means we'll be using cargo-leptos's env values
@@ -39,11 +39,16 @@ async fn main() {
         .fallback(file_and_error_handler)
         .with_state(app_state);
 
-    // run app with hyper
-    // `axum::Server` is a re-export of `hyper::Server`
-    log::info!("listening on http://{}", &addr);
     let listener = tokio::net::TcpListener::bind(addr).await.unwrap();
+    log::info!("listening on http://{}", &addr);
     axum::serve(listener, app.into_make_service())
         .await
         .unwrap();
+}
+
+#[cfg(not(feature = "ssr"))]
+pub fn main() {
+    // no client-side main function
+    // unless we want this to work with e.g., Trunk for a purely client-side app
+    // see lib.rs for hydration function instead
 }

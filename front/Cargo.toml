@@ -2,11 +2,10 @@
 name = "front"
 version = "0.1.0"
 edition = "2021"
-description = "Clant-side application"
+description = ""
 
 [dependencies]
-ui_kit = { path = "../ui_kit" }
-server = { path = "../server" }
+# server = { path = "../server" }
 
 leptos.workspace = true
 leptos_meta.workspace = true
@@ -14,13 +13,10 @@ leptos_router.workspace = true
 leptos_axum = { workspace = true, optional = true }
 leptos_macro.workspace = true
 leptos_reactive.workspace = true
-
 gloo-timers.workspace = true
-
 http.workspace = true
 cfg-if.workspace = true
 thiserror.workspace = true
-
 leptos-use.workspace = true
 stylance.workspace = true
 

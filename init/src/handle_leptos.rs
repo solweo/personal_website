@@ -16,8 +16,6 @@ pub async fn server_fn_handler(
 ) -> impl IntoResponse {
     handle_server_fns_with_context(
         move || {
-            log::debug!("Providing MD parser context (server_fn)");
-
             let AppState {
                 md_parser,
                 reqwest_client,
@@ -40,8 +38,6 @@ pub async fn leptos_routes_handler(
     let handler = leptos_axum::render_app_async_with_context(
         option.clone(),
         move || {
-            log::debug!("Providing MD parser context (router)");
-            
             let AppState {
                 md_parser,
                 reqwest_client,
