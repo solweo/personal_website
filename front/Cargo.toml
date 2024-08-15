@@ -7,6 +7,7 @@ description = ""
 [dependencies]
 # server = { path = "../server" }
 ui_kit = { path = "../ui_kit" }
+addons = { path = "../addons" }
 leptos.workspace = true
 leptos_meta.workspace = true
 leptos_router.workspace = true
@@ -32,7 +33,10 @@ hydrate = [
     "leptos/hydrate", 
     "leptos_meta/hydrate", 
     "leptos_router/hydrate",
-    "ui_kit/hydrate"
+    "leptos_reactive/hydrate",
+    "leptos_macro/hydrate",
+    "ui_kit/hydrate",
+    "addons/hydrate",
 ]
 ssr = [
     "leptos/ssr", 
@@ -40,7 +44,10 @@ ssr = [
     "leptos-use/axum", 
     "leptos_meta/ssr", 
     "leptos_router/ssr", 
+    "leptos_reactive/ssr",
+    "leptos_macro/ssr",
     "dep:leptos_axum",
-    "ui_kit/ssr"
+    "ui_kit/ssr",
+    "addons/ssr",
 ]
 

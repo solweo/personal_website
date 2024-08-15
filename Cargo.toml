@@ -5,6 +5,7 @@ members = [
     "server",
     "front",
     "ui_kit",
+    "addons",
 ]
 
 [workspace.dependencies]

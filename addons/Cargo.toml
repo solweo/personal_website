@@ -1,18 +1,18 @@
 [package]
-name = "ui_kit"
+name = "addons"
 version = "0.1.0"
 edition = "2021"
-description = "A collection of UI components"
+description = "A collection of custom basic Leptos's components"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
 
-addons = { path = "../addons" }
-
 leptos.workspace = true
 leptos_meta.workspace = true
 leptos_router.workspace = true
+leptos_reactive.workspace = true
+leptos_macro.workspace = true
 leptos_axum = { workspace = true, optional = true }
 
 http.workspace = true
@@ -20,13 +20,6 @@ cfg-if.workspace = true
 thiserror.workspace = true
 
 leptos-use.workspace = true
-stylance.workspace = true
-
-[package.metadata.stylance]
-output_file = "../target/stylance-output/ui_kit.css"
-output_dir = "../target/"
-extensions = [".css"]
-class_name_pattern = "[name]"
 
 [features]
 default = []
@@ -34,14 +27,16 @@ hydrate = [
     "leptos/hydrate", 
     "leptos_meta/hydrate", 
     "leptos_router/hydrate",
-    "addons/hydrate",
+    "leptos_reactive/hydrate",
+    "leptos_macro/hydrate",
 ]
 ssr = [
     "leptos/ssr", 
     "leptos-use/ssr", 
     "leptos-use/axum", 
     "leptos_meta/ssr", 
-    "leptos_router/ssr", 
-    "dep:leptos_axum",
-    "addons/ssr",
+    "leptos_router/ssr",
+    "leptos_reactive/ssr",
+    "leptos_macro/ssr",
+    "dep:leptos_axum"
 ]
