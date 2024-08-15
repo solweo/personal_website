@@ -1,4 +1,5 @@
 pub mod error_template;
+pub mod routes;
 
 use crate::error_template::{AppError, ErrorTemplate};
 use leptos::*;
