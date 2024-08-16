@@ -8,4 +8,4 @@ pub use home::Home;
 pub use about::About;
 pub use work::Work;
 pub use works::Works;
-pub use playground::Playgorund;
+pub use playground::Playground;
