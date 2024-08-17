@@ -5,9 +5,9 @@ edition = "2021"
 description = ""
 
 [dependencies]
-# server = { path = "../server" }
 ui_kit = { path = "../ui_kit" }
 addons = { path = "../addons" }
+server = { path = "../server" }
 leptos.workspace = true
 leptos_meta.workspace = true
 leptos_router.workspace = true
@@ -20,6 +20,7 @@ cfg-if.workspace = true
 thiserror.workspace = true
 leptos-use.workspace = true
 stylance.workspace = true
+log.workspace = true
 
 [package.metadata.stylance]
 output_file = "../target/stylance-output/front.css"
@@ -37,6 +38,7 @@ hydrate = [
     "leptos_macro/hydrate",
     "ui_kit/hydrate",
     "addons/hydrate",
+    "server/hydrate",
 ]
 ssr = [
     "leptos/ssr", 
@@ -49,5 +51,6 @@ ssr = [
     "dep:leptos_axum",
     "ui_kit/ssr",
     "addons/ssr",
+    "server/ssr",
 ]
 
