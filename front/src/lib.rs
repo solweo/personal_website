@@ -8,9 +8,9 @@ use leptos_meta::*;
 use leptos_router::*;
 
 use stylance::import_style as get_css;
-get_css!(index, "./index.css");
+get_css!(pub index, "./index.css");
 
-use ui_kit::style_baseline;
+// use ui_kit::style_baseline;
 
 #[component]
 pub fn App() -> impl IntoView {

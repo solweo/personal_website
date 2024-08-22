@@ -23,6 +23,8 @@ leptos-use.workspace = true
 
 [features]
 default = []
+csr = []
+experimental-islands = []
 hydrate = [
     "leptos/hydrate", 
     "leptos_meta/hydrate", 

@@ -1,9 +1,11 @@
 use leptos::*;
 use serde::{Deserialize, Serialize};
-use yaml_front_matter::YamlFrontMatter;
-use crate::api::{ApiError, ErrorOn};
-#[cfg(feature = "ssr")]
-use crate::article_parser;
+use crate::api::ApiError;
+cfg_if::cfg_if! { if #[cfg(feature = "ssr")] {
+    use crate::api::ErrorOn;
+    use yaml_front_matter::YamlFrontMatter;
+    use crate::article_parser;
+}}
 
 #[derive(Debug, Deserialize, Serialize, PartialEq, Eq, Clone)]
 pub struct Article {
@@ -28,6 +30,7 @@ pub enum Error {
     FailedToParse,
 }
 
+#[cfg(feature = "ssr")]
 async fn fetch_markdown_from_cdn(id: &str) -> Result<String, reqwest::Error> {
     let url = format!("http://cdn.solweo.tech/{}.md", id);
     expect_context::<reqwest::Client>()
@@ -40,7 +43,7 @@ pub async fn fetch_article(_id: String) -> Result<Article, ServerFnError<ApiErro
     println!("Called `fetch_article`");
 
     // fake API delay
-    std::thread::sleep(std::time::Duration::from_millis(1000));
+    // std::thread::sleep(std::time::Duration::from_millis(1000));
 
     // Swapping to test ID
     let id = "test_article".to_string();

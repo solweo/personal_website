@@ -108,8 +108,6 @@ where
         let handle: StoredValue<Option<TimeoutHandle>> = store_value(None);
 
         create_render_effect(move |_| {
-            leptos::logging::log!("Yo: {}", when.get());
-    
             if when.get() {
                 fb_cls.set(fallback_outro);
 

@@ -1,6 +1,8 @@
 use leptos::*;
 use serde::{Deserialize, Serialize};
-use crate::api::{ApiError, ErrorOn};
+use crate::api::ApiError;
+#[cfg(feature = "ssr")]
+use crate::api::ErrorOn;
 
 #[derive(thiserror::Error, Debug, Copy, Clone, PartialEq, Eq, Serialize, Deserialize)]
 pub enum Error {
@@ -12,7 +14,7 @@ pub enum Error {
 pub async fn fetch_foo(id: i32) -> Result<String, ServerFnError<ApiError>> {
     // fake API delay
     leptos::logging::log!("Calling fetch_foo; id: {}", id);
-    std::thread::sleep(std::time::Duration::from_millis(700));
+    // std::thread::sleep(std::time::Duration::from_millis(700));
     
     if (id + 1) % 2 == 0 {
         return Err(ErrorOn::from(Error::DummyServerError).into());
