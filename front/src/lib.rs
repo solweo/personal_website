@@ -11,6 +11,7 @@ use stylance::import_style as get_css;
 get_css!(pub index, "./index.css");
 
 // use ui_kit::style_baseline;
+use ui_kit::Header;
 
 #[component]
 pub fn App() -> impl IntoView {
@@ -28,6 +29,7 @@ pub fn App() -> impl IntoView {
             outside_errors.insert_with_default_key(AppError::NotFound);
             view! { <DisplayError outside_errors/> }.into_view()
         }>
+            <Header/>
             <h1>"Personal website"</h1>
             <main>
                 <AnimatedRoutes

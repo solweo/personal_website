@@ -1,5 +1,7 @@
+pub mod header;
 pub mod tagline;
 
+pub use header::*;
 pub use tagline::*;
 
 use leptos::*;
