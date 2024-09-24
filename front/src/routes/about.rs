@@ -1,6 +1,6 @@
 use leptos::*;
 use leptos_meta::*;
-use ui_kit::{style_baseline, Article};
+use ui_kit::Article;
 
 #[component]
 pub fn About() -> impl IntoView {
