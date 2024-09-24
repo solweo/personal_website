@@ -11,6 +11,7 @@ cfg_if::cfg_if! { if #[cfg(feature = "ssr")] {
 pub struct Article {
     pub aliases: Vec<String>,
     pub description: String,
+    pub preview: String,
     pub content: String,
 }
 
@@ -18,6 +19,7 @@ pub struct Article {
 struct Metadata {
     aliases: Vec<String>,
     description: String,
+    preview: String,
 }
 
 #[derive(thiserror::Error, Debug, Copy, Clone, PartialEq, Eq, Serialize, Deserialize)]
@@ -39,14 +41,14 @@ async fn fetch_markdown_from_cdn(id: &str) -> Result<String, reqwest::Error> {
 }
 
 #[server]
-pub async fn fetch_article(_id: String) -> Result<Article, ServerFnError<ApiError>> {
+pub async fn fetch_article(id: String) -> Result<Article, ServerFnError<ApiError>> {
     println!("Called `fetch_article`");
 
     // fake API delay
     // std::thread::sleep(std::time::Duration::from_millis(1000));
 
     // Swapping to test ID
-    let id = "test_article".to_string();
+    // let id = "test_article".to_string();
 
     let markdown_source = match fetch_markdown_from_cdn(&id).await {
         Ok(v) => v,
@@ -61,6 +63,7 @@ pub async fn fetch_article(_id: String) -> Result<Article, ServerFnError<ApiErro
     let Metadata {
         aliases,
         description,
+        preview, 
     } = result.metadata;
     
     let html_output = expect_context::<article_parser::ArticleParser>().parse(&result.content);
@@ -69,6 +72,7 @@ pub async fn fetch_article(_id: String) -> Result<Article, ServerFnError<ApiErro
         // id: "yuvOBfTQ_bw".to_string(),
         aliases,
         description,
+        preview,
         content: html_output,
     })
 }

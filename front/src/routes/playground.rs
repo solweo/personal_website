@@ -3,6 +3,7 @@ use server::api::ErrorOn;
 use std::time::Duration;
 use addons::{AnimatedSuspense, AnimatedBoundary};
 use crate::index;
+use ui_kit::{style_baseline, Article};
 
 #[component]
 pub fn playground() -> impl IntoView {
@@ -19,10 +20,10 @@ pub fn playground() -> impl IntoView {
 
         <AnimatedBoundary
             value=async_foo
-            intro=index::fadeIn
-            outro=index::fadeOut
-            fallback_intro=index::fadeIn
-            fallback_outro=index::fadeOut
+            intro=style_baseline::fadeIn
+            outro=style_baseline::fadeOut
+            fallback_intro=style_baseline::fadeIn
+            fallback_outro=style_baseline::fadeOut
             delay=Duration::from_millis(250)
             suspense_fallback=move || view! { <p>"Loading..."</p> }
             error_fallback=move |v| {
@@ -44,9 +45,9 @@ pub fn playground() -> impl IntoView {
         >
             <p>"Retrived data: "{data}</p>
         </AnimatedBoundary>
+
+        <Article/>
         
-        // Should work as good as foo, but for some reason it always fails to render 
-        // the article's html after the second reload and displays it as plain text
         // <AnimatedBoundary
         //     value=async_article
         //     intro=index::fadeIn
@@ -80,48 +81,8 @@ pub fn playground() -> impl IntoView {
         //     }
         //     let:data
         // >
-        //     <h3>"Here the article: "{data.content}</h3>  
+        //     <h3>"Here the article: "</h3>
+        //     <div inner_html={data.content}></div>
         // </AnimatedBoundary>
-
-        <AnimatedSuspense
-            intro=index::fadeIn
-            outro=index::fadeOut
-            fallback_intro=index::fadeIn
-            fallback_outro=index::fadeOut
-            delay=Duration::from_millis(250)
-            fallback=move || view! { <p>"Loading..."</p> }
-        >
-            <h2>"Retrived Data"</h2>
-            {move || {
-                async_article.get().map(|data| { match data {
-                        Result::Err(v) => {
-                            if let ErrorOn::FetchArticle(err) = ErrorOn::from(v) {
-                                match err {
-                                    server::api::fetch_article::Error::InvalidId => view! {
-                                        <h3>"An invalid article ID was sent to the server"</h3>
-                                        <button on:click=on_click>"Try again"</button>
-                                    }.into_view(),
-                                    server::api::fetch_article::Error::NotFound => view! {
-                                        <h3>"Server couldn't find the article by the specified ID"</h3>
-                                        <button on:click=on_click>"Try again"</button>
-                                    }.into_view(),
-                                    server::api::fetch_article::Error::FailedToParse => view! {
-                                        <h3>"There is something faulty with the article, server failed to handle it"</h3>
-                                        <button on:click=on_click>"Try again"</button>
-                                    }.into_view(),
-                                }
-                            } else {
-                                view! {
-                                    <h3>"An error occurred that is NOT related to fetching Article"</h3>
-                                    <button on:click=on_click>"Try again"</button>
-                                }.into_view()
-                            }
-                        },
-                        Result::Ok(v) => view! {
-                            <h3>"Here the article: "{v.content}</h3>
-                        }.into_view(),
-                }})
-            }}
-        </AnimatedSuspense>
     }
 }

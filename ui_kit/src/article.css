@@ -1,0 +1,99 @@
+.square_squirrel_mask {
+    /* 
+        To get Base64-encoded Data URIs for SVG `fffuel.co/eeencode`
+        SVG squircle generator `copyicon.com/generator/svg-squircle`
+    */
+    --squircle-svg-data-uri: url("data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMTAwIDEwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB2ZXJzaW9uPSIxLjEiIGZpbGw9IiMyZWJjNGYiPjxwYXRoIGQ9IgpNIDAgNTAKQyAwIDAsIDAgMCwgNTAgMApTIDEwMCAwLCAxMDAgNTAsIDEwMCAxMDAKNTAgMTAwLCAwIDEwMCwgMCA1MAoiIHRyYW5zZm9ybT0iCnJvdGF0ZSgKMCwKNTAsCjUwCikKdHJhbnNsYXRlKAowLAowCikKIj48L3BhdGg+PC9zdmc+");
+    
+    -webkit-mask-size: contain; 
+    mask-size: contain; 
+    -webkit-mask-repeat: no-repeat; 
+    mask-repeat: no-repeat; 
+    -webkit-mask-position: center; 
+    mask-position: center; 
+    -webkit-mask-repeat-x: no-repeat; 
+    -webkit-mask-repeat-y: no-repeat;
+
+    -webkit-mask-image: var(--squircle-svg-data-uri);
+    mask-image: var(--squircle-svg-data-uri);
+    clip-path: var(--squircle-svg-data-uri);
+    
+    overflow: hidden;
+
+    display:  block; 
+    object-fit: cover;
+}
+
+.article_container {
+    max-width: 55rem;
+    margin: clamp(2rem, 5vw, 4rem) auto 0;
+}
+
+.aliases_container * {
+    font-size: clamp(2rem, 5vw, 4rem); 
+    font-weight: 900;
+}
+
+.preview_and_description {
+    margin-top: clamp(2rem, 5vw, 4rem);
+    
+    display: flex;
+    justify-content: start;
+
+    & img {
+        aspect-ratio: 1 / 1;
+        min-width: 12rem;
+        max-width: 45%;
+        margin: 0;
+    }
+
+    & h1 {
+        font-size: clamp(1.2rem, 3.5vw, 2rem); 
+        font-weight: 600;
+        margin-top: 1.2rem;
+        margin-left: 1.2rem;
+    }
+}
+
+@media(max-width: 35rem) {
+    .preview_and_description {
+        display: block;
+        margin: 1.2rem .6rem 0;
+
+        & img {
+            aspect-ratio: 1 / 1;
+            min-width: none;
+            max-width: none;
+            width: 100%;
+            margin: 0;
+        }
+
+        & h1 {
+            margin-left: 0;
+        }
+    }
+}
+
+.article_itself {
+    margin-top: clamp(2rem, 5vw, 4rem);
+    
+    & h2 {
+        font-size: clamp(2rem, 3.3vw, 3rem); 
+        font-weight: 900;
+    }
+
+    & p {
+        font-size: clamp(1.2rem, 2.5vw, 1.5rem); 
+        font-weight: 300;
+    }
+
+    & table {
+        table-layout: fixed;
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    & th, td {
+      padding-right: 1.2rem;
+    }
+}

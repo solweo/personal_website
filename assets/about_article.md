@@ -1,13 +1,14 @@
 ---
-aliases: ['Adrian Alekseev', 'Solweo']
-description: 'about me'
+aliases: ['Solweo', 'Adrian Alekseev']
+description: 'Created this personal site as a way to learn and share insight on products, tech and art, as a person tied to software development and industrial design'
+preview: 'http://cdn.solweo.tech/assets/Adrian.png'
 ---
 
 | Languages&technologies | Education&certificates |
-| ---------------------  | --------------------   |
-| Rust, Java, PostgreSQL | Cisco Networking Academy — «IT Essentials» |
-| Android Studio | RTU MIREA — «Biotechnical Systems and Technologies» |
-| Leptos, Bevy | STEP IT Academy — «Software Engineer»  |
+| :--------------------  | :-------------------   |
+| Rust, Java, PostgreSQL | «IT Essentials» — Cisco Networking Academy |
+| Android Studio | «Biotechnical Systems and Technologies» — RTU MIREA |
+| Leptos, Bevy | «Software Engineer» — STEP IT Academy |
 | Git, Linux |  |
 
 

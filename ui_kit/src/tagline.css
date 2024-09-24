@@ -1,41 +1,4 @@
-.title {
+.tagline > span {
     font-size: 3rem;
     font-weight: 900;
-}
-
-.liquid {
-    font-size: 3rem;
-    font-weight: 900;
-    background: linear-gradient(-45deg, #904e95, #904e95, #e73c7e, #ee7752);
-	background-size: 300%;
-    line-height: 1.2;
-	-webkit-background-clip: text;
-	-webkit-text-fill-color: transparent;
-	animation: animated_text 5s ease-in-out infinite;
-	-moz-animation: animated_text 5s ease-in-out infinite;
-	-webkit-animation: animated_text 5s ease-in-out infinite;
-}
-
-@keyframes animated_text {
-	0% { background-position: 0px 50%; }
-	50% { background-position: 100% 50%; }
-	100% { background-position: 0px 50%; }
-}
-
-.stub {
-    animation: stub_blink .45s ease-in-out infinite;
-	-moz-animation: stub_blink .45s ease-in-out infinite;
-	-webkit-animation: stub_blink .45s ease-in-out infinite;
-    transition: .25s ease-in-out;
-}
-
-.stub_hidden {
-    font-size: 0;
-    opacity: 0;
-    visibility: hidden;
-}
-
-@keyframes stub_blink {
-	from { opacity: 0; }
-	to { opacity: 1; }
 }

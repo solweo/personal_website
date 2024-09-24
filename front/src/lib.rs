@@ -22,15 +22,12 @@ pub fn App() -> impl IntoView {
         <Stylesheet id="leptos" href="/ui_kit.css"/>
         <link id="leptos" rel="stylesheet" href="/front.css"/>
 
-        <Title text="Welcome to Leptos"/>
-
         <Router fallback=|| {
             let mut outside_errors = Errors::default();
             outside_errors.insert_with_default_key(AppError::NotFound);
             view! { <DisplayError outside_errors/> }.into_view()
         }>
             <Header/>
-            <h1>"Personal website"</h1>
             <main>
                 <AnimatedRoutes
                     outro=""

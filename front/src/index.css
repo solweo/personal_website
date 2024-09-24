@@ -2,24 +2,6 @@
     background-color: red;
 }
 
-.fadeIn {
-    animation: .5s cubic-bezier(.76,0,.24,1) fadeIn forwards;
-}
-
-.fadeOut {
-    animation: .5s cubic-bezier(.76,0,.24,1) fadeOut forwards;
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-}
-
-@keyframes fadeOut {
-    from { opacity: 1;}
-    to { opacity: 0;}
-}
-
 .slideIn {
     animation: .5s cubic-bezier(.76,0,.24,1) slideIn forwards;
 }

@@ -1,8 +1,12 @@
 pub mod header;
 pub mod tagline;
+pub mod article;
+pub mod typewritter;
 
 pub use header::*;
 pub use tagline::*;
+pub use article::*;
+pub use typewritter::*;
 
 use leptos::*;
 use stylance::import_style as get_css;

@@ -1,8 +1,9 @@
 use leptos::*;
+use ui_kit::{style_baseline, Article};
 
 #[component]
 pub fn About() -> impl IntoView {
     view! {
-        <h3>"About page placeholder"</h3>
+        <Article id="about_article"/>
     }
 }

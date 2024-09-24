@@ -1,11 +1,11 @@
 use leptos::*;
 use stylance::import_style as get_css;
 
-get_css!(tagline_css, "./header.css");
+get_css!(header_css, "./header.css");
 
 #[component]
 pub fn Header() -> impl IntoView {
     view! {
-        <h3>"Header placeholder"</h3>
+        <p>"Header placeholder"</p>
     }
 }
