@@ -1,5 +1,4 @@
 use leptos::*;
-use leptos_meta::*;
 use server::api::ErrorOn;
 use std::time::Duration;
 use addons::AnimatedBoundary;
@@ -20,8 +19,6 @@ pub fn Article(
     let async_article = create_resource(count, |_| server::api::fetch_article(id.to_string()));
     
     view! {
-        <Title text="Article"/>
-
         <AnimatedBoundary
             value=async_article
             intro=style_baseline::fadeIn

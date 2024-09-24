@@ -1,4 +1,5 @@
 use leptos::*;
+use leptos_meta::*;
 use server::api::ErrorOn;
 use std::time::Duration;
 use addons::{AnimatedSuspense, AnimatedBoundary};
@@ -14,6 +15,8 @@ pub fn playground() -> impl IntoView {
     let async_article = create_resource(count, |_| server::api::fetch_article("test_article".to_string()));
 
     view! {
+        <Title text="Playground for code experimentation"/>
+
         <h3>"Playground page placeholder"</h3>
 
         <button on:click=on_click>"Refresh anchored ones. Already: "{count}"th time"</button>
