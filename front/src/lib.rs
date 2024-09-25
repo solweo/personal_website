@@ -28,12 +28,13 @@ pub fn App() -> impl IntoView {
             view! { <DisplayError outside_errors/> }.into_view()
         }>
             <Header/>
+            <h1>"Personal website"</h1>
             <main>
                 <AnimatedRoutes
-                    outro=""
-                    intro=""
-                    outro_back=""
-                    intro_back=""
+                    outro="slideOut"
+                    intro="slideIn"
+                    outro_back="slideOutBack"
+                    intro_back="slideInBack"
                 >
                     <Route path="/" view=Home/>
                     <Route path="/about" view=About/>
