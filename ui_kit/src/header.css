@@ -1,0 +1,33 @@
+.bottom_floating_header {
+    position: fixed;
+    bottom: 1.5rem;
+    left: 50%;
+    transform: translate(-50%);
+
+    width: max-content;
+    height: 1.5rem;
+
+    border: 0.1rem solid #25282D;
+    box-shadow: 0 0 40px floralwhite;
+    border-radius: 1.15rem;
+    padding: 0.2rem;
+    background-color: rgba(255, 250, 240, 0.8);
+    backdrop-filter: blur(0.1rem);
+    -webkit-backdrop-filter: blur(0.1rem);
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.header_nav {
+    font-size: clamp(1.2rem, 2.5vw, 1.5rem); 
+    font-weight: 300;
+    padding-inline: clamp(.6rem, 1.25vw, .75rem);
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    color: #25282D;
+}
