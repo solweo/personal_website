@@ -63,12 +63,12 @@
     & header {
         position: fixed;
         z-index: 9999;
-        bottom: 1.5rem;
+        bottom: clamp(1.2rem, 2.5vw, 1.5rem);
         left: 50%;
         transform: translate(-50%);
 
         width: max-content;
-        height: 1.5rem;
+        height: clamp(1.2rem, 2.5vw, 1.5rem);
 
         display: flex;
         flex-direction: row;
@@ -97,7 +97,7 @@
     & nav {
         position: fixed;
         z-index: 9999;
-        bottom: 5.5rem;
+        bottom: calc(3.5 * clamp(1.2rem, 2.5vw, 1.5rem));
         left: 50%;
         transform: translate(-50%);
         /* transform-origin: -100% 50%; */
