@@ -45,17 +45,19 @@ pub fn Header() -> impl IntoView {
             <header
                 attr:data-state=header_attr
             >
+                <button
+                    class=header_css::close_btn_in_header
+                    on:click = close_either
+                >"Close"</button>
                 <A 
+                    class=header_css::logo_in_header
                     href="/"
                     on:click=close_either
                 >"Solweo"</A>
                 <button
                     on:click = open_menu
                 >"Menu"</button>
-                <button
-                    class=header_css::close_btn
-                    on:click = close_either
-                >"Close"</button>
+                
                 <button
                     on:click = open_contact
                 >"Contact"</button>

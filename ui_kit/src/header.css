@@ -56,7 +56,7 @@
         padding: clamp(1.2rem, 2.5vw, 1.5rem) clamp(1.2rem, 2.5vw, 1.5rem) 0;
     }
 
-    & .close_btn {
+    & :not(nav, address) {
         transition: .5s cubic-bezier(.76,0,.24,1);
     }
 
@@ -76,15 +76,21 @@
         justify-content: space-between;
 
         &[data-state="neutral"] {
-            & .close_btn {
+            & .close_btn_in_header {
                 @mixin hide-element-in-header;
             }
         }
     
         &[data-state="expanded"] {
+            & :not(.close_btn_in_header) {
+                @mixin hide-element-in-header;
+            }
         }
     
         &[data-state="collapsed"] {
+            & :not(.logo_in_header) {
+                @mixin hide-element-in-header;
+            }
         }
     }
 
