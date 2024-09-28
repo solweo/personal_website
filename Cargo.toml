@@ -17,9 +17,9 @@ leptos_axum = { version = "0.6" }
 leptos_meta = { version = "0.6", features = ["nightly"] }
 leptos_router = { version = "0.6", features = ["nightly"] }
 tokio = { version = "1", features = ["rt-multi-thread"] }
-tower = { version = "0.4" }
+tower = { version = "0.5" }
 tower-http = { version = "0.5", features = ["fs"] }
-wasm-bindgen = "=0.2.92"
+wasm-bindgen = "0.2.93"
 thiserror = "1"
 tracing = { version = "0.1" }
 http = "1"
@@ -35,7 +35,7 @@ yaml-front-matter = "0.1.0"
 leptos_macro = { version = "0.6" }
 leptos_reactive = { version = "0.6" }
 gloo-timers = { version = "0.3.0", features = ["futures"] }
-leptos-use = "0.10.7"
+leptos-use = "0.13.5"
 stylance = { version = "0.5.1", features = ["nightly"] }
 # additional
 simple_logger = "5"
