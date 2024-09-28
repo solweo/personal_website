@@ -56,6 +56,10 @@
         padding: clamp(1.2rem, 2.5vw, 1.5rem) clamp(1.2rem, 2.5vw, 1.5rem) 0;
     }
 
+    & .close_btn {
+        transition: .5s cubic-bezier(.76,0,.24,1);
+    }
+
     & header {
         position: fixed;
         z-index: 9999;
@@ -70,6 +74,18 @@
         flex-direction: row;
         align-items: center;
         justify-content: space-between;
+
+        &[data-state="neutral"] {
+            & .close_btn {
+                @mixin hide-element-in-header;
+            }
+        }
+    
+        &[data-state="expanded"] {
+        }
+    
+        &[data-state="collapsed"] {
+        }
     }
 
     & nav {
@@ -78,6 +94,8 @@
         bottom: 5.5rem;
         left: 50%;
         transform: translate(-50%);
+        /* transform-origin: -100% 50%; */
+        /* transform: scale(.6); */
 
         padding-bottom: clamp(1.2rem, 2.5vw, 1.5rem);
         width: max-content;

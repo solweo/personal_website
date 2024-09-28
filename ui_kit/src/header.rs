@@ -30,9 +30,21 @@ pub fn Header() -> impl IntoView {
         })
     );
 
+    let header_attr = create_memo(move |_| 
+        with!(|menu_opened, contact_opened| 
+            match (menu_opened, contact_opened) {
+                (true, _) => "expanded",
+                (_, true) => "expanded",
+                (_, _) => "neutral",
+            }
+        )
+    );
+
     view! {
         <div class=header_css::bottom_floating_navigational_header_container>
-            <header>
+            <header
+                attr:data-state=header_attr
+            >
                 <A 
                     href="/"
                     on:click=close_either
@@ -41,6 +53,7 @@ pub fn Header() -> impl IntoView {
                     on:click = open_menu
                 >"Menu"</button>
                 <button
+                    class=header_css::close_btn
                     on:click = close_either
                 >"Close"</button>
                 <button
