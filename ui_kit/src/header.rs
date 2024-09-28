@@ -35,6 +35,7 @@ pub fn Header() -> impl IntoView {
             <header>
                 <A 
                     href="/"
+                    on:click=close_either
                 >"Solweo"</A>
                 <button
                     on:click = open_menu
@@ -51,19 +52,28 @@ pub fn Header() -> impl IntoView {
             >
                 <A
                     href="/about"
+                    on:click = close_either
                 >"About"</A>
                 <A 
                     href="/works"
+                    on:click = close_either
                 >"Works"</A>
                 <A 
                     href="/playground"
+                    on:click = close_either
                 >"Playground"</A>
             </nav>
             <address
                 attr:data-state=contact_attr
             >
-                <A on:click=close_either href="https://t.me/solweo">"Telegram: @solweo"</A>
-                <A on:click=close_either href="mailto:adrian@solweo.tech">"Mail: adrian@solweo.tech"</A>
+                <A
+                    href="https://t.me/solweo"
+                    on:click=close_either
+                >"Telegram: @solweo"</A>
+                <A 
+                    href="mailto:adrian@solweo.tech"
+                    on:click=close_either
+                >"Mail: adrian@solweo.tech"</A>
             </address>
         </div>
     }
