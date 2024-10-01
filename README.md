@@ -30,8 +30,59 @@ This project depend on the following tools. Please install them as needed.
 
 ## Running the project locally in dev mode
 
->Not yet drafted
+Call `just dev`
 
-## Deploying to the cloud
+## Deploying to the server
 
->Not yet drafted
+My setup includes [NGINX](https://nginx.org/) to handle multiple domains, where specifically www.solweo.tech is proxied to a port raised by Leptos.
+
+Call `just serve` to serve it at `site-addr` (Look into leptos' metadata at `Cargo.toml`) in release mode.
+
+If you're curious about my particular set-up, see below.
+
+### NGINX configuration file
+
+Configuration file at `/etc/nginx/conf.d/solweo.tech.conf`:
+
+```conf
+server {
+  listen *:80 default_server;
+  listen [::]:80 default_server;
+
+  server_name solweo.tech www.solweo.tech;
+
+  location / {
+    proxy_pass http://{site-addr}; # Ex: `127.0.0.1:3000`
+    proxy_http_version 1.1;
+    proxy_set_header Upgrade $http_upgrade;
+    proxy_set_header Connection 'upgrade';
+    proxy_set_header Host $host;
+    proxy_cache_bypass $http_upgrade;
+  }
+}
+```
+
+Launching system service via `systemctl start nginx`.
+
+### Leptos app as a system service
+
+System's service configuration file at `/etc/systemd/system/my-site.service`:
+
+```service
+[Unit]
+Description=Personal website service
+After=multi-user.target
+[Service]
+Type=simple
+Restart=always
+WorkingDirectory=/var/www/solweo.tech/
+ExecStart=just serve
+[Install]
+WantedBy=multi-user.target
+```
+
+And towards the end there are only 3 steps:
+
+1. Updating system daemon: `sudo systemctl daemon-reload`;
+2. Enabling service: `systemctl enable my-site.service`;
+3. Starting service: `systemctl start my-site.service`.
