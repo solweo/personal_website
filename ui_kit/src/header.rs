@@ -1,13 +1,52 @@
 use leptos::*;
 use leptos_router::*;
+use leptos_use::*;
 use stylance::import_style as get_css;
 
 get_css!(header_css, "./header.css");
+
+#[derive(PartialEq, Debug, Clone)]
+enum Direction {
+    Up,
+    Down,
+}
+
+#[derive(Clone, Copy)]
+struct TrackScroll {
+    y1: Signal<f64>,
+    y0: StoredValue<f64>,
+}
+
+impl Default for TrackScroll {
+    fn default() -> Self {
+        let (_, y1) = use_window_scroll();
+        Self {
+            y1,
+            y0: store_value(y1.get_untracked()),
+        }
+    }
+}
+
+impl TrackScroll {
+    fn direction(&self) -> Direction {
+        let (y1, y0) = (self.y1, self.y0);
+        let delta = with!(|y1, y0| y1 - y0);
+        y0.update_value(|v| *v = y1.get_untracked());
+        if delta > 0.0 {
+            return  Direction::Down;
+        }
+        Direction::Up
+    }
+}
 
 #[component]
 pub fn Header() -> impl IntoView {
     let (menu_opened, set_menu_opened) = create_signal(false);
     let (contact_opened, set_contact_opened) = create_signal(false);
+    let scroll_direction = create_memo({
+        let scroll_direction = TrackScroll::default();
+        move |_| { scroll_direction.direction() }
+    });
 
     let open_menu = move |_| set_menu_opened.update(|v| *v = true);
     let open_contact = move |_| set_contact_opened.update(|v| *v = true);
@@ -32,10 +71,11 @@ pub fn Header() -> impl IntoView {
 
     let header_attr = create_memo(move |_| 
         with!(|menu_opened, contact_opened| 
-            match (menu_opened, contact_opened) {
-                (true, _) => "expanded",
-                (_, true) => "expanded",
-                (_, _) => "neutral",
+            match (menu_opened, contact_opened, scroll_direction()) {
+                (true, _, _) => "expanded",
+                (_, true, _) => "expanded",
+                (_, _, Direction::Up) => "neutral",
+                (_, _, Direction::Down) => "collapsed",
             }
         )
     );
