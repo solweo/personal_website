@@ -17,10 +17,10 @@ pub struct Article {
 
 #[derive(Debug, Deserialize, Serialize, Clone)]
 pub struct Metadata {
-    aliases: Vec<String>,
-    description: String,
-    preview: String,
-    liasions: Vec<String>,
+    pub aliases: Vec<String>,
+    pub description: String,
+    pub preview: String,
+    pub liasions: Vec<String>,
 }
 
 #[derive(thiserror::Error, Debug, Copy, Clone, PartialEq, Eq, Serialize, Deserialize)]
