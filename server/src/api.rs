@@ -1,5 +1,6 @@
 pub mod error;
 pub mod fetch_article;
+pub mod fetch_preview;
 pub mod fetch_foo;
 
 pub use error::{ApiError, ErrorOn};

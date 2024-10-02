@@ -15,8 +15,8 @@ pub struct Article {
     pub content: String,
 }
 
-#[derive(Debug, Deserialize, Clone)]
-struct Metadata {
+#[derive(Debug, Deserialize, Serialize, Clone)]
+pub struct Metadata {
     aliases: Vec<String>,
     description: String,
     preview: String,
