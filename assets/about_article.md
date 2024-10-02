@@ -2,9 +2,10 @@
 aliases: ['Solweo', 'Adrian Alekseev']
 description: 'Created this personal site as a way to learn and share insight on products, tech and art, as a person tied to software development and industrial design'
 preview: 'http://cdn.solweo.tech/assets/Adrian.png'
+liasions: ['software development', 'web development', 'hobby', 'user experience']
 ---
 
-| Languages&technologies | Education&certificates |
+| Languages & technologies | Education & certificates |
 | :--------------------  | :-------------------   |
 | Rust, Java, PostgreSQL | «IT Essentials» — Cisco Networking Academy |
 | Android Studio | «Biotechnical Systems and Technologies» — RTU MIREA |

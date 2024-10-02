@@ -20,6 +20,7 @@ pub struct Metadata {
     aliases: Vec<String>,
     description: String,
     preview: String,
+    liasions: Vec<String>,
 }
 
 #[derive(thiserror::Error, Debug, Copy, Clone, PartialEq, Eq, Serialize, Deserialize)]
@@ -64,6 +65,7 @@ pub async fn fetch_article(id: String) -> Result<Article, ServerFnError<ApiError
         aliases,
         description,
         preview, 
+        ..
     } = result.metadata;
     
     let html_output = expect_context::<article_parser::ArticleParser>().parse(&result.content);

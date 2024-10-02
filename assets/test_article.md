@@ -2,8 +2,9 @@
 aliases: ['some alias', 'another alias']
 description: 'Some description'
 preview: 'http://cdn.solweo.tech/assets/photo_art_flower.png'
+liasions: ['web development', 'layout system', 'page layout', 'markdown']
 ---
-
+ 
 ## Code
 
 ```rust
