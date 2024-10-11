@@ -24,6 +24,8 @@ thiserror.workspace = true
 leptos-use.workspace = true
 stylance.workspace = true
 
+itertools.workspace = true
+
 [package.metadata.stylance]
 output_file = "../target/stylance-output/ui_kit.css"
 output_dir = "../target/"

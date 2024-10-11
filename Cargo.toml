@@ -39,6 +39,7 @@ leptos-use = "0.13.5"
 stylance = { version = "0.5.1", features = ["nightly"] }
 # additional
 simple_logger = "5"
+itertools = "0.13.0"
 
 # Defines a size-optimized profile for the WASM bundle in release mode
 [profile.wasm-release]

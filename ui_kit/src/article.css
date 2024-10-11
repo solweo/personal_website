@@ -1,29 +1,3 @@
-.square_squirrel_mask {
-    /* 
-        To get Base64-encoded Data URIs for SVG `fffuel.co/eeencode`
-        SVG squircle generator `copyicon.com/generator/svg-squircle`
-    */
-    --squircle-svg-data-uri: url("data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMTAwIDEwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB2ZXJzaW9uPSIxLjEiIGZpbGw9IiMyZWJjNGYiPjxwYXRoIGQ9IgpNIDAgNTAKQyAwIDAsIDAgMCwgNTAgMApTIDEwMCAwLCAxMDAgNTAsIDEwMCAxMDAKNTAgMTAwLCAwIDEwMCwgMCA1MAoiIHRyYW5zZm9ybT0iCnJvdGF0ZSgKMCwKNTAsCjUwCikKdHJhbnNsYXRlKAowLAowCikKIj48L3BhdGg+PC9zdmc+");
-    
-    -webkit-mask-size: contain; 
-    mask-size: contain; 
-    -webkit-mask-repeat: no-repeat; 
-    mask-repeat: no-repeat; 
-    -webkit-mask-position: center; 
-    mask-position: center; 
-    -webkit-mask-repeat-x: no-repeat; 
-    -webkit-mask-repeat-y: no-repeat;
-
-    -webkit-mask-image: var(--squircle-svg-data-uri);
-    mask-image: var(--squircle-svg-data-uri);
-    clip-path: var(--squircle-svg-data-uri);
-    
-    overflow: hidden;
-
-    display:  block; 
-    object-fit: cover;
-}
-
 .article_container {
     max-width: 55rem;
     margin: clamp(2rem, 5vw, 4rem) auto 0;

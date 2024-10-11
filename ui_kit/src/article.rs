@@ -57,7 +57,7 @@ pub fn Article(
                     <TypeWritterFX words={data.aliases}/>
                 </div>
                 <div class=article_css::preview_and_description>
-                    <img src={data.preview} class=article_css::square_squirrel_mask alt="Aricle's preview image"/>
+                    <img src={data.preview} class=style_baseline::square_squirrel_mask alt="Aricle's preview image"/>
                     <h1>{data.description}</h1>
                 </div>
                 <div class=article_css::article_itself inner_html={data.content}></div>
