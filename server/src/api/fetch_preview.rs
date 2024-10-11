@@ -25,7 +25,7 @@ pub async fn fetch_preview() -> Result<Vec<ArticlePreview>, ServerFnError<ApiErr
     let mut meta_bodies = Vec::new();
 
     for id in ids {
-        let response = reqwest::get(format!("http://cdn.solweo.tech/{}.md", id)).await;
+        let response = reqwest::get(format!("http://cdn.solweo.tech/work/{}/en.md", id)).await;
         if let Ok(response) = response { 
             let md_body = response.text().await.unwrap();
             let result = YamlFrontMatter::parse::<Metadata>(&md_body).unwrap();

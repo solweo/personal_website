@@ -35,7 +35,7 @@ pub enum Error {
 
 #[cfg(feature = "ssr")]
 async fn fetch_markdown_from_cdn(id: &str) -> Result<String, reqwest::Error> {
-    let url = format!("http://cdn.solweo.tech/{}.md", id);
+    let url = format!("http://cdn.solweo.tech/work/{}/en.md", id);
     expect_context::<reqwest::Client>()
         .get(&url).send().await?
         .text().await
