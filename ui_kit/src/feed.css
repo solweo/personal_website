@@ -120,6 +120,13 @@
             font-size: calc(clamp(1.2rem, 2.5vw, 1.5rem) * 1.2); 
             font-weight: 600;
             margin: 0;
+
+            width: calc(98% - clamp(1.2rem, 2.5vw, 1.5rem)*2.7);
+            overflow: hidden;
+            white-space: nowrap;
+            word-wrap: break-word; 
+            overflow-wrap: break-word;
+            text-overflow: ellipsis;
         }
     }
 
