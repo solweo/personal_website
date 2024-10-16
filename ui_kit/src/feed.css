@@ -85,11 +85,16 @@
                     opacity: 0.3;
                 }
         
-                & h2 {
+                & a {
                     font-size: calc(clamp(1.2rem, 2.5vw, 1.5rem) * 1.2); 
                     font-weight: 600;
-                    margin: 0;
+                    background-color: transparent;
+                    border: none;
+                    cursor: pointer;
+                    text-decoration: none;
+                    color: #25282D;
                     width: calc(100% - clamp(1.2rem, 2.5vw, 1.5rem)*2.7);
+                    margin: 0;
 
                     overflow: hidden;
                     white-space: nowrap;

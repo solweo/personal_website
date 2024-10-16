@@ -1,5 +1,5 @@
-use html::Title;
 use leptos::*;
+use leptos_router::*;
 use leptos_use::*;
 use std::time::Duration;
 use itertools::Itertools;
@@ -47,10 +47,10 @@ fn FeedContainer(articles: Vec<ArticlePreview>) -> impl IntoView {
     let title_tiles = articles.iter()
         .rev()
         .map(|article| {
-            let (id, title) = (&article.id, &article.aliases[0]);
+            let (id, title) = (article.id.clone(), article.aliases[0].clone());
             let obfuscated_id = match id.len() > 5 {
-                true => &format!("{}…{}", &id[..2], &id[id.len() - 2..]),
-                false => id,
+                true => format!("{}…{}", &id[..2], &id[id.len() - 2..]),
+                false => id.clone(),
             };
 
             let el = create_node_ref::<leptos::html::Div>();
@@ -62,7 +62,7 @@ fn FeedContainer(articles: Vec<ArticlePreview>) -> impl IntoView {
             view! {
                 <div class=feed_css::work_tile node_ref=el>
                     <p>{obfuscated_id}</p>
-                    <h2>{title}</h2>
+                    <A href={id}>{title}</A>
                 </div>
                 <hr/>
             }
