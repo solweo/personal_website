@@ -1,7 +1,6 @@
 use leptos::*;
-use leptos_router::*;
 use leptos_meta::*;
-use ui_kit::{typewritter::TypeWritterFX, WorksFeed};
+use ui_kit::WorksFeed;
 
 #[component]
 pub fn Works() -> impl IntoView {

@@ -48,6 +48,6 @@ pub fn playground() -> impl IntoView {
             <p>"Retrived data: "{data}</p>
         </AnimatedBoundary>
 
-        <Article/>
+        <Article id={"test_article".to_string()}/>
     }
 }

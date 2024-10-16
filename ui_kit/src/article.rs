@@ -10,13 +10,12 @@ get_css!(article_css, "./article.css");
 
 #[component]
 pub fn Article(
-    #[prop(default = "test_article")]
-    id: &'static str,
+    id: String,
 ) -> impl IntoView {
     let (count, set_count) = create_signal(0);
     let on_click = move |_| set_count.update(|count| *count += 1);
 
-    let async_article = create_resource(count, |_| server::api::fetch_article(id.to_string()));
+    let async_article = create_resource(count, move |_| server::api::fetch_article(id.clone()));
     
     view! {
         <AnimatedBoundary

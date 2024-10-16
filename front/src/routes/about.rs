@@ -6,6 +6,6 @@ use ui_kit::Article;
 pub fn About() -> impl IntoView {
     view! {
         <Title text="Article about me"/>
-        <Article id="about_article"/>
+        <Article id={"about_article".to_string()}/>
     }
 }
