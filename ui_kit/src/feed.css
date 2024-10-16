@@ -18,150 +18,225 @@
     color: #25282D;
 }
 
-.feed_container {
-    
+.headline_container {
+    margin: clamp(1.2rem, 2.5vw, 1.5rem) clamp(1.2rem, 2.5vw, 1.5rem) 0;
+
+    & * {
+        font-size: clamp(2rem, 5vw, 4rem); 
+        font-weight: 900;
+    }
 }
 
-.preview_carousel {
+.feed_container {
     display: flex;
     flex-direction: row;
-    width: 100%;
-    overflow: hidden;
-    height: 6.5rem;
-    margin: 0;
 
-    & .article_preview_tile {
+    margin: clamp(1.2rem, 2.5vw, 1.5rem) clamp(1.2rem, 2.5vw, 1.5rem) 0;
+
+    & .combine_titles_and_liasions {
+        width: calc(100% - clamp(12rem, 30vw, 24rem) - clamp(1.2rem, 2.5vw, 1.5rem));
+
+        & .titles_listing {
+            display: block;
+            overflow-y: scroll;
+            scrollbar-width: none;
+            scrollbar-color: transparent;
+            scroll-snap-type: y mandatory;
+            scroll-behavior: smooth;
+
+            height: calc(clamp(1.2rem, 2.5vw, 1.5rem)*2);
+            /* padding-bottom: 26rem; */
+            padding-bottom: calc((clamp(1.2rem, 2.5vw, 1.5rem) * 1.2 + clamp(1.2rem, 2.5vw, 1.5rem) * 2) * 5.5);
+
+            /* Fade Out Overflow Effect
+            Thanks to https://pqina.nl/blog/fade-out-overflow-using-css-mask-image/ */
+
+            /* mask fade distance, for use in mask calculations */
+            --mask-height: calc(clamp(1.2rem, 2.5vw, 1.5rem)*2);
+
+            --mask-image-content: linear-gradient(
+                to bottom,
+                transparent,
+                black var(--mask-height),
+                black calc(100% - var(--mask-height)),
+                transparent
+            );
+
+            mask-image: var(--mask-image-content);
+            mask-size: 100% 100%;
+            mask-position: 0 0;
+            mask-repeat: no-repeat;
+            
+            & .work_tile {
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                scroll-snap-align: start;
+                scroll-snap-stop: always;
+
+                margin: 0 0 clamp(1.2rem, 2.5vw, 1.5rem);
+                padding: clamp(1.2rem, 2.5vw, 1.5rem) 0 0;
+        
+                & p {
+                    font-size: calc(clamp(1.2rem, 2.5vw, 1.5rem) / 1.2); 
+                    font-weight: 300;
+                    margin: 0;
+                    width: calc(clamp(1.2rem, 2.5vw, 1.5rem)*2.7);
+                    opacity: 0.3;
+                }
+        
+                & h2 {
+                    font-size: calc(clamp(1.2rem, 2.5vw, 1.5rem) * 1.2); 
+                    font-weight: 600;
+                    margin: 0;
+                    width: calc(100% - clamp(1.2rem, 2.5vw, 1.5rem)*2.7);
+
+                    overflow: hidden;
+                    white-space: nowrap;
+                    word-wrap: break-word; 
+                    overflow-wrap: break-word;
+                    text-overflow: ellipsis;
+                }
+            }
+        
+            & hr {
+                opacity: .2;
+                border-top: 1px solid #141414;
+                border-bottom: none;
+                margin: 0;
+                border-radius: 50%;
+        
+                &:last-child {
+                    display: none;
+                }
+            }
+        
+            
+        }
+        
+        & .liasion_selector {
+            display: flex;
+            flex-wrap: wrap;
+
+            margin-top: clamp(1.2rem, 2.5vw, 1.5rem);
+        
+            & .liasion_tile {
+                @mixin lining-glass;
+
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+
+                width: max-content;
+                height: clamp(1.2rem, 2.5vw, 1.5rem);
+                margin: calc(clamp(1.2rem, 2.5vw, 1.5rem) / 4);
+
+                & button {
+                    @mixin neutral-clickable;
+                }
+            }
+        }
+    }
+
+    & .preview_carousel {
+        --preview-dimensions: clamp(12rem, 30vw, 24rem);
+
         display: flex;
-        flex-direction: row;
-        transition: .5s cubic-bezier(.76,0,.24,1);
-        width: 95vw;
-    
-        & img {
+        flex-direction: column;
+        width: var(--preview-dimensions);
+        height: 45vh;
+        
+        margin-left: clamp(1.2rem, 2.5vw, 1.5rem);
+
+        & .article_preview_tile {
+            display: flex;
+            flex-direction: column;
+            margin: 0;
+            height: 40vh;
+
             transition: .5s cubic-bezier(.76,0,.24,1);
-            aspect-ratio: 1 / 1;
-            min-width: 6.5rem;
-            max-width: 6.5rem;
-            margin: 0;
-        }
-    
-        & p {
-            transition: .5s cubic-bezier(.76,0,.24,1);
-            font-size: clamp(1.2rem, 3.5vw, 2rem); 
-            font-weight: 600;
-            margin: 0;
-            padding-left: clamp(1.2rem, 2.5vw, 1.5rem);
-            min-width: calc(95vw - 6.5rem - clamp(1.2rem, 2.5vw, 1.5rem));
-        }
-    
-        &[data-state="exposed"] { /* Just normal style as above */ }
-    
-        &[data-state="hidden"] {
-            opacity: 0;
-            visibility: hidden;
-            pointer-events: none;
-            width: 0;
-            overflow: visible;
-            transform: scale(.6);
-        }
-    }
-}
 
-.titles_listing {
-    display: block;
-    overflow-y: scroll;
-    scrollbar-width: none;
-    scrollbar-color: transparent;
-    scroll-snap-type: y mandatory;
-    scroll-behavior: smooth;
-
-    height: calc(clamp(1.2rem, 2.5vw, 1.5rem)*2);
-    /* Need to make sure container has bottom space,
-    otherwise content at the bottom is always faded out */
-    padding-bottom: 17rem;
-
-    /* Fade Out Overflow Effect
-    Thanks to https://pqina.nl/blog/fade-out-overflow-using-css-mask-image/ */
-
-    /* mask fade distance, for use in mask calculations */
-    --mask-height: calc(clamp(1.2rem, 2.5vw, 1.5rem)*2);
-
-    --mask-image-content: linear-gradient(
-        to bottom,
-        transparent,
-        black var(--mask-height),
-        black calc(100% - var(--mask-height)),
-        transparent
-    );
-
-    mask-image: var(--mask-image-content);
-    mask-size: 100% 100%;
-    mask-position: 0 0;
-    mask-repeat: no-repeat;
-
-    & .work_tile {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        scroll-snap-align: start;
-        scroll-snap-stop: always;
-
-        margin: 0 0 clamp(1.2rem, 2.5vw, 1.5rem);
-        padding-top: clamp(1.2rem, 2.5vw, 1.5rem);
-
-        & p {
-            font-size: calc(clamp(1.2rem, 2.5vw, 1.5rem) / 1.2); 
-            font-weight: 300;
-            margin: 0;
-            width: calc(clamp(1.2rem, 2.5vw, 1.5rem)*2.7);
-            opacity: 0.3;
-        }
-
-        & h2 {
-            font-size: calc(clamp(1.2rem, 2.5vw, 1.5rem) * 1.2); 
-            font-weight: 600;
-            margin: 0;
-
-            width: calc(98% - clamp(1.2rem, 2.5vw, 1.5rem)*2.7);
-            overflow: hidden;
-            white-space: nowrap;
-            word-wrap: break-word; 
-            overflow-wrap: break-word;
-            text-overflow: ellipsis;
-        }
-    }
-
-    & hr {
-        opacity: .2;
-        border-top: 1px solid #141414;
-        border-bottom: none;
-        margin: 0;
-        border-radius: 50%;
-
-        &:last-child {
-            display: none;
+            & img {
+                aspect-ratio: 1 / 1;
+                min-height: var(--preview-dimensions);
+                max-height: var(--preview-dimensions);
+                min-width: var(--preview-dimensions);
+                max-width: var(--preview-dimensions);
+                margin: 0;
+            }
+        
+            & p {
+                font-size: clamp(1.2rem, 3.5vw, 2rem); 
+                font-weight: 600;
+                margin: clamp(1.2rem, 2.5vw, 1.5rem) 0 0;
+            }
+        
+            &[data-state="exposed"] { /* Just normal style as above */ }
+        
+            &[data-state="hidden"] {
+                overflow: visible;
+                pointer-events: none;
+                visibility: hidden;
+                transform: scale(.6);
+                opacity: 0;
+                   
+                @media not (max-width: 50rem) {
+                    & {
+                        height: 0;
+                    }
+                }
+            }
         }
     }
 
     
-}
 
-.liasion_selector {
-    display: flex;
-    flex-wrap: wrap;
+    @media (max-width: 50rem) {
+        & {
+            display: flex;
+            flex-direction: column-reverse;
 
-    & .liasion_tile {
-        @mixin lining-glass;
-    
-        width: max-content;
-        height: clamp(1.2rem, 2.5vw, 1.5rem);
-        margin: calc(clamp(1.2rem, 2.5vw, 1.5rem) / 4);
-    
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-    
-        & button {
-            @mixin neutral-clickable;
+            margin: clamp(1.2rem, 2.5vw, 1.5rem) 0 0;
+
+            & .combine_titles_and_liasions {
+                width: calc(100% - clamp(1.2rem, 2.5vw, 1.5rem) * 2);
+                margin-inline: clamp(1.2rem, 2.5vw, 1.5rem);
+            }
+
+            & .preview_carousel {
+                --preview-dimensions: clamp(6.5rem, 20vw, 12rem);
+
+                display: flex;
+                flex-direction: row;
+                overflow: hidden;
+                width: 100%;
+                height: var(--preview-dimensions);
+                
+                margin: 0;
+
+                & .article_preview_tile {
+                    display: flex;
+                    flex-direction: row;
+                    width: 90vw;
+                    height: var(--preview-dimensions);
+
+                    & img {
+                        margin-left: clamp(1.2rem, 2.5vw, 1.5rem);
+                    }
+                
+                    & p {
+                        min-width: calc(90vw - var(--preview-dimensions) - clamp(1.2rem, 2.5vw, 1.5rem));
+                        margin: 0 0 0 clamp(1.2rem, 2.5vw, 1.5rem);
+                        padding-right: clamp(1.2rem, 2.5vw, 1.5rem);
+                    }
+                
+                    &[data-state="exposed"] { /* Just normal style as above */ }
+                
+                    &[data-state="hidden"] {
+                        width: 0;    
+                    }
+                }
+            }
         }
     }
 }

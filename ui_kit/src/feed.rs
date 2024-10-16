@@ -6,6 +6,7 @@ use itertools::Itertools;
 use server::api::{ErrorOn, fetch_preview::ArticlePreview};
 use addons::AnimatedBoundary;
 use crate::style_baseline;
+use crate::typewritter::TypeWritterFX;
 use stylance::import_style as get_css;
 
 get_css!(feed_css, "./feed.css");
@@ -46,7 +47,7 @@ fn FeedContainer(articles: Vec<ArticlePreview>) -> impl IntoView {
     let title_tiles = articles.iter()
         .rev()
         .map(|article| {
-            let (id, alias) = (&article.id, &article.aliases[0]);
+            let (id, title) = (&article.id, &article.aliases[0]);
             let obfuscated_id = match id.len() > 5 {
                 true => &format!("{}…{}", &id[..2], &id[id.len() - 2..]),
                 false => id,
@@ -61,7 +62,7 @@ fn FeedContainer(articles: Vec<ArticlePreview>) -> impl IntoView {
             view! {
                 <div class=feed_css::work_tile node_ref=el>
                     <p>{obfuscated_id}</p>
-                    <h2>{alias}</h2>
+                    <h2>{title}</h2>
                 </div>
                 <hr/>
             }
@@ -117,10 +118,20 @@ fn FeedContainer(articles: Vec<ArticlePreview>) -> impl IntoView {
         }).collect_view();
 
     view! {
+        
+        <div class=feed_css::headline_container>
+            <TypeWritterFX words={vec![
+                "Work library".to_string(), 
+                "Insight essays".to_string(),
+                "Project publications".to_string()
+            ]}/>
+        </div>
         <div class=feed_css::feed_container>
+            <div class=feed_css::combine_titles_and_liasions> 
+                <div class=feed_css::titles_listing> {title_tiles} </div>
+                <div class=feed_css::liasion_selector> {liason_tiles} </div>
+            </div>
             <div class=feed_css::preview_carousel> {preview_tiles} </div>
-            <div class=feed_css::titles_listing> {title_tiles} </div>
-            <div class=feed_css::liasion_selector> {liason_tiles} </div>
         </div>
     }
 }
