@@ -1,4 +1,8 @@
-.tagline > span {
-    font-size: 3rem;
-    font-weight: 900;
+.tagline {
+    margin: clamp(1.8rem, 7.5vw, 3.6rem);
+
+    & > span {
+        font-size: clamp(1.8rem, 7.5vw, 3.6rem);
+        font-weight: 900;
+    }
 }

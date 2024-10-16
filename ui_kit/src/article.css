@@ -1,9 +1,9 @@
 .article_container {
     max-width: 55rem;
-    margin: clamp(2rem, 5vw, 4rem) auto 0;
+    margin: clamp(1.8rem, 7.5vw, 3.6rem) auto 0;
 
     & .aliases_container * {
-        font-size: clamp(2rem, 5vw, 4rem); 
+        font-size: clamp(1.8rem, 7.5vw, 3.6rem); 
         font-weight: 900;
     }
 
@@ -11,7 +11,7 @@
         display: flex;
         justify-content: start;
 
-        margin-top: clamp(2rem, 5vw, 4rem);
+        margin-top: clamp(1.8rem, 7.5vw, 3.6rem);
     
         & img {
             aspect-ratio: 1 / 1;
@@ -29,7 +29,7 @@
     }
 
     & .article_itself {
-        margin-top: clamp(2rem, 5vw, 4rem);
+        margin-top: clamp(1.8rem, 7.5vw, 3.6rem);
         
         & h2 {
             font-size: clamp(2rem, 3.3vw, 3rem); 

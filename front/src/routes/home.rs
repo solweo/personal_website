@@ -6,7 +6,7 @@ use ui_kit::Tagline;
 pub fn Home() -> impl IntoView {
     view! {
         <Title text="Solweo's home page"/>
-        <h3>"Home page placeholder"</h3>
+        <h1>""</h1>
         <Tagline/>
     }
 }

@@ -21,8 +21,14 @@
 .headline_container {
     margin: clamp(1.2rem, 2.5vw, 1.5rem) clamp(1.2rem, 2.5vw, 1.5rem) 0;
 
+    @media (max-width: 50rem) {
+        & {
+            margin: calc(clamp(1.2rem, 2.5vw, 1.5rem) / 4) calc(clamp(1.2rem, 2.5vw, 1.5rem) / 4) 0;
+        }
+    }
+
     & * {
-        font-size: clamp(2rem, 5vw, 4rem); 
+        font-size: clamp(1.8rem, 7.5vw, 3.6rem); 
         font-weight: 900;
     }
 }
@@ -205,7 +211,7 @@
 
             & .combine_titles_and_liasions {
                 width: calc(100% - clamp(1.2rem, 2.5vw, 1.5rem) * 2);
-                margin-inline: clamp(1.2rem, 2.5vw, 1.5rem);
+                margin-inline: calc(clamp(1.2rem, 2.5vw, 1.5rem) / 4);
             }
 
             & .preview_carousel {
@@ -226,7 +232,7 @@
                     height: var(--preview-dimensions);
 
                     & img {
-                        margin-left: clamp(1.2rem, 2.5vw, 1.5rem);
+                        margin-left: calc(clamp(1.2rem, 2.5vw, 1.5rem) / 4);
                     }
                 
                     & p {
